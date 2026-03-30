@@ -6,7 +6,7 @@ import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 export function Hero() {
   return (
     <section id="home">
-      <HeroGeometric
+      <HeroGeometric 
         badge="Digital Engineering & Design"
         title1="Full-Stack / "
         title2="Software Developer"
