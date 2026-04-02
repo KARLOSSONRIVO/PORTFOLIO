@@ -1,70 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { LayoutGrid, Layers, User, Mail, Component } from "lucide-react";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 export function Navbar() {
   const pathname = usePathname();
-  // heroSection: controlled by the hero animation signals ("home" | "about")
-  const [heroSection, setHeroSection] = useState("home");
-  // scrollSection: controlled by native scroll position ("projects" | "contact" | "")
-  const [scrollSection, setScrollSection] = useState("");
-
-  // Active navlink = scroll-based if within page body, else hero-controlled
-  const activeSection = scrollSection || heroSection;
-
-  useEffect(() => {
-    if (pathname !== "/") {
-      setScrollSection(pathname.includes("/projects") ? "projects" : "");
-      return;
-    }
-
-    // Hero fires this event when card state changes (home ↔ about)
-    const handleHeroSection = (e: Event) => {
-      const custom = e as CustomEvent<{ section: string }>;
-      setHeroSection(custom.detail.section);
-      // Clear scroll-based section when going back to hero zone
-      if (custom.detail.section === "home") setScrollSection("");
-    };
-    window.addEventListener("heroSectionChange", handleHeroSection);
-
-    // Scroll listener to detect projects / contact sections
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      if (scrollY < 200) {
-        // Back in hero zone — let hero signal control
-        setScrollSection("");
-        return;
-      }
-
-      const projects = document.getElementById("projects");
-      const contact = document.getElementById("contact");
-      const mid = scrollY + window.innerHeight * 0.4;
-
-      if (contact && mid >= contact.offsetTop) {
-        setScrollSection("contact");
-      } else if (projects && mid >= projects.offsetTop) {
-        setScrollSection("projects");
-      } else {
-        setScrollSection("");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("heroSectionChange", handleHeroSection);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [pathname]);
+  const activeSection = useActiveSection();
 
   /** Intercept Home/About clicks to animate the hero instead of doing hash navigation */
   const handleHeroNav = (action: "expand" | "collapse") => (e: React.MouseEvent) => {
-    if (pathname !== "/") return; // Let Next.js navigate normally from other pages
+    if (pathname !== "/") return;
     e.preventDefault();
     window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: { action } }));
   };

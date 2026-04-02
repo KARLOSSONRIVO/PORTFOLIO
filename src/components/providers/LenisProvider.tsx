@@ -25,7 +25,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     // Start paused — hero grants permission via custom event
     lenis.stop();
 
-    const startTimer = { id: 0 as ReturnType<typeof setTimeout> };
+    const startTimer = { id: undefined as ReturnType<typeof setTimeout> | undefined };
 
     const handleHeroSection = (e: Event) => {
       const custom = e as CustomEvent<{ section: string }>;
