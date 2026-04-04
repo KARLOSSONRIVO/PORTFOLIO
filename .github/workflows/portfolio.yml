@@ -13,20 +13,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: 
-      image: node:24
+      image: node:20
     steps:
       - uses: actions/checkout@v4
       #- uses: actions/setup-node@v4  
        # with:
        #   node-version: 20
-      - run: npm ci
+
       #- run: npx playwright install --with-deps
       #- run: npx playwright test
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ always() && env.ACT != 'true' }}
         with:
           name: test-report
-          path: test-report
+          path: .next
           retention-days: 30
