@@ -1,4 +1,4 @@
-name: Portfolio
+name: Test-Portfolio
 
 on:
   push:
@@ -8,7 +8,9 @@ on:
     branches:
       - main
       
-
+defaults:
+  run:
+    working-directory: ./docs
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,6 +26,7 @@ jobs:
       #- run: npx playwright test
       - run: npm ci
       - run: npm run build
+        name: Testing build
         env: 
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NEXT_TELEMETRY_DISABLED: 1
