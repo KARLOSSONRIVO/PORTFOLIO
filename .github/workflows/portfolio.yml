@@ -7,26 +7,32 @@ on:
   pull_request:
     branches:
       - main
-      
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: node:20
+
     steps:
       - uses: actions/checkout@v4
-      #- uses: actions/setup-node@v4  
-       # with:
-       #   node-version: 20
 
-      #- run: npx playwright install --with-deps
-      #- run: npx playwright test
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-artifact@v4
-        if: ${{ always() && env.ACT != 'true' }}
+      - name: Cache npm and Next cache
+        uses: actions/cache@v4
         with:
-          name: test-report
-          path: .next
-          retention-days: 30
+          path: |
+            ~/.npm
+            .next/cache
+          key: ${{ runner.os }}-next-${{ hashFiles('package-lock.json') }}-${{ hashFiles('app/**/*', 'src/**/*', 'components/**/*', 'public/**/*', 'package.json', 'next.config.*') }}
+          restore-keys: |
+            ${{ runner.os }}-next-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-next-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_TELEMETRY_DISABLED: 1
