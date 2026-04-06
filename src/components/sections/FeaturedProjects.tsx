@@ -5,6 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
+import carbonsenseImg from "@/app/images/Projects/Carbonsense.png";
+import finshieldImg from "@/app/images/Projects/finshield.png";
+
 const projects = [
   {
     id: "carbonsense",
@@ -13,7 +16,7 @@ const projects = [
     description: "A real-time sustainability engine tracking industrial carbon footprints using high-throughput data processing and predictive analytics.",
     tags: ["Sustainability", "AI Engine"],
     tech: ["Express.js", "Node.js", "MongoDB", "Python", "FastAPI"],
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80",
+    image: carbonsenseImg.src,
   },
   {
     id: "finshield",
@@ -22,7 +25,7 @@ const projects = [
     description: "Decentralized financial security layer protecting transactions through cryptographically secure blockchain consensus mechanisms.",
     tags: ["Security", "Blockchain"],
     tech: ["Express.js", "MongoDB", "Python", "Blockchain", "IPFS"],
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80",
+    image: finshieldImg.src,
   },
 ];
 

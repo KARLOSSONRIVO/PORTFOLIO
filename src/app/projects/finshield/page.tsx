@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import finshieldImg from "@/app/images/Projects/finshield.png";
 
 export default function FinShieldPage() {
   return (
@@ -12,9 +13,11 @@ export default function FinShieldPage() {
       <p className="text-xl text-blue-400 mb-12">Secure Invoice Audit & Verification</p>
       
       <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
-        {/* Placeholder for the real image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/5 pointer-events-none" />
-        <span className="text-zinc-500 font-medium z-10">Project Screenshot / Mockup Placeholder</span>
+        <img 
+          src={finshieldImg.src} 
+          alt="FinShield Project Screenshot" 
+          className="w-full h-full object-cover"
+        />
       </div>
       
       <div className="space-y-12">

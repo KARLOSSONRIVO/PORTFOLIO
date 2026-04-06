@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import carbonsenseImg from "@/app/images/Projects/Carbonsense.png";
 
 export default function CarbonSensePage() {
   return (
@@ -12,9 +13,11 @@ export default function CarbonSensePage() {
       <p className="text-xl text-green-400 mb-12">Intelligent Carbon Footprint Tracking</p>
       
       <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
-        {/* Placeholder for the real image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/5 pointer-events-none" />
-        <span className="text-zinc-500 font-medium z-10">Project Screenshot / Mockup Placeholder</span>
+        <img 
+          src={carbonsenseImg.src} 
+          alt="CarbonSense Project Screenshot" 
+          className="w-full h-full object-cover"
+        />
       </div>
       
       <div className="space-y-12">
