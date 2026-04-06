@@ -40,7 +40,7 @@ jobs:
       - name: Build Next.js static export
         run: npm run build
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_TELEMETRY_DISABLED: 1
 
       - name: Verify export folder exists
