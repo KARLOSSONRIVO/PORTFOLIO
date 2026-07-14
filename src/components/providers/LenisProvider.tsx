@@ -1,6 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 /**
@@ -11,6 +12,27 @@ import { useEffect, useRef } from "react";
  */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
+
+  // Route changes: Next.js already moves the native scroll position (to the
+  // top, or to a hash target) before this runs. Lenis tracks its own
+  // scroll target internally, so re-sync it to wherever the native scroll
+  // landed — otherwise Lenis's next RAF tick can animate back to the stale
+  // pre-navigation position. Only non-home routes get `start()`, since the
+  // hero on "/" controls Lenis via `heroSectionChange`.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+    if (pathname !== "/") lenis.start();
+    requestAnimationFrame(() => {
+      lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+    });
+  }, [pathname]);
 
   useEffect(() => {
     const lenis = new Lenis({

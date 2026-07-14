@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col`}
@@ -37,6 +38,17 @@ export default function RootLayout({
           <Footer />
         </LenisProvider>
       </body>
+      {/* Runs before hydration so no previous-scroll flash is ever visible. */}
+      <Script id="disable-scroll-restoration" strategy="beforeInteractive">
+        {`
+          if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+          }
+          if (!window.location.hash) {
+            window.scrollTo(0, 0);
+          }
+        `}
+      </Script>
     </html>
   );
 }
