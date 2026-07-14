@@ -35,7 +35,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-32 px-4 md:px-8 bg-surface text-center relative overflow-hidden"
+      className="py-20 sm:py-24 md:py-32 section-px-sm bg-surface text-center relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-t from-primary/8 via-transparent to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
@@ -60,7 +60,7 @@ export function Contact() {
         <motion.h2
           custom={1}
           variants={fadeUp}
-          className="font-headline font-black text-5xl md:text-7xl tracking-tighter mb-6"
+          className="font-headline font-black text-heading tracking-tighter mb-6"
         >
           Get In Touch
         </motion.h2>

@@ -37,18 +37,18 @@ export default function RootLayout({
           <main className="flex-1 w-full">{children}</main>
           <Footer />
         </LenisProvider>
+        {/* Runs before hydration so no previous-scroll flash is ever visible. */}
+        <Script id="disable-scroll-restoration" strategy="beforeInteractive" async>
+          {`
+            if ("scrollRestoration" in history) {
+              history.scrollRestoration = "manual";
+            }
+            if (!window.location.hash) {
+              window.scrollTo(0, 0);
+            }
+          `}
+        </Script>
       </body>
-      {/* Runs before hydration so no previous-scroll flash is ever visible. */}
-      <Script id="disable-scroll-restoration" strategy="beforeInteractive">
-        {`
-          if ("scrollRestoration" in history) {
-            history.scrollRestoration = "manual";
-          }
-          if (!window.location.hash) {
-            window.scrollTo(0, 0);
-          }
-        `}
-      </Script>
     </html>
   );
 }

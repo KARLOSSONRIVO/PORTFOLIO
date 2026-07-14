@@ -10,7 +10,7 @@
   --color-zinc-600: #52525b;
   --color-zinc-500: #71717a;
   --color-zinc-400: #a1a1aa;
-  
+
   --color-primary: #dc143c;
   --color-primary-container: #7a0b21;
   --color-on-primary-container: #ffffff;
@@ -22,15 +22,21 @@
   --color-surface-container-low: #18181b;
   --color-surface-container-lowest: #09090b;
   --color-outline-variant: #3f3f46;
-  
+
   --color-red-500: #e50914;
   --color-red-600: #b9090b;
   --color-red-900: #4a0404;
-  
+
   --font-sans: var(--font-poppins);
   --font-headline: var(--font-poppins);
   --font-body: var(--font-poppins);
   --font-label: var(--font-poppins);
+
+  /* Extra breakpoint below Tailwind's default `sm` (640px) for small phones (320-374px) */
+  --breakpoint-xs: 23.4375rem; /* 375px */
+
+  /* Height reserved for the fixed mobile bottom nav (bar + floating offset + safe area) */
+  --mobile-nav-clearance: calc(6rem + env(safe-area-inset-bottom));
 }
 
 :root {
@@ -57,6 +63,63 @@ body {
 .glass-panel:hover {
   border-color: rgba(229, 9, 20, 0.3); /* faint crimson border on hover */
   box-shadow: 0 4px 30px rgba(229, 9, 20, 0.1);
+}
+
+/* ── Shared responsive layout primitives ──────────────────────────────── */
+/* Reproduces each section's original desktop padding exactly at md (768px)+
+   while easing the mobile side down from a cramped fixed value to a fluid one. */
+@layer components {
+  /* Sections that used `px-8 md:px-24` (About, Featured Projects, Tech Stack) */
+  .section-px {
+    padding-left: clamp(1rem, 1.6vw + 0.7rem, 2rem);
+    padding-right: clamp(1rem, 1.6vw + 0.7rem, 2rem);
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) {
+    .section-px {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
+
+  /* Sections that used `px-4 md:px-8` (Contact) */
+  .section-px-sm {
+    padding-left: clamp(0.75rem, 1.2vw + 0.4rem, 1rem);
+    padding-right: clamp(0.75rem, 1.2vw + 0.4rem, 1rem);
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) {
+    .section-px-sm {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Hero title (was text-4xl sm:text-6xl md:text-8xl) */
+  .text-display {
+    font-size: clamp(1.75rem, 7.1vw + 0.3rem, 6rem);
+  }
+
+  /* Large section headings, e.g. "Featured Projects" / "About" / "Get In Touch"
+     (was text-5xl md:text-7xl) */
+  .text-heading {
+    font-size: clamp(2rem, 5.7vw + 0.9rem, 4.5rem);
+  }
+
+  /* Medium section heading (Tech Stack, was text-4xl md:text-5xl) */
+  .text-heading-sm {
+    font-size: clamp(1.75rem, 2.8vw + 1.2rem, 3rem);
+  }
+
+  /* Bottom clearance so the fixed mobile nav never covers trailing content */
+  .mobile-nav-clearance {
+    padding-bottom: var(--mobile-nav-clearance);
+  }
+  @media (min-width: 768px) {
+    .mobile-nav-clearance {
+      padding-bottom: 0;
+    }
+  }
 }
 
 /* Custom Scrollbar for sleekness */

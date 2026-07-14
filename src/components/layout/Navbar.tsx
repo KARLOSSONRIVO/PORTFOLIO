@@ -20,10 +20,10 @@ export function Navbar() {
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-gradient-to-b from-surface to-transparent pointer-events-none">
-        <nav className="flex justify-between items-center px-8 py-6 max-w-full mx-auto pointer-events-auto">
-          <Link href="/" onClick={handleHeroNav("collapse")} className="flex items-center gap-2 group">
-            <Component className="text-primary w-8 h-8 group-hover:rotate-180 transition-transform duration-700" />
-            <span className="text-2xl font-black tracking-[-0.04em] text-primary font-headline uppercase">
+        <nav className="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 max-w-full mx-auto pointer-events-auto">
+          <Link href="/" onClick={handleHeroNav("collapse")} className="flex items-center gap-1.5 sm:gap-2 group min-w-0">
+            <Component className="text-primary w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 shrink-0 group-hover:rotate-180 transition-transform duration-700" />
+            <span className="text-base xs:text-lg sm:text-xl md:text-2xl font-black tracking-[-0.04em] text-primary font-headline uppercase truncate">
               Karlos Rivo
             </span>
           </Link>
@@ -45,7 +45,10 @@ export function Navbar() {
       </header>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex justify-around items-center p-2 z-50 bg-surface-container/60 backdrop-blur-xl w-[90%] max-w-md rounded-2xl border border-outline-variant/15 shadow-[0_0_40px_rgba(220,20,60,0.08)]">
+      <nav
+        className="md:hidden fixed left-1/2 -translate-x-1/2 flex justify-around items-center p-1.5 xs:p-2 z-50 bg-surface-container/60 backdrop-blur-xl w-[92%] xs:w-[90%] max-w-md rounded-2xl border border-outline-variant/15 shadow-[0_0_40px_rgba(220,20,60,0.08)]"
+        style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}
+      >
         <MobileNavLink href="/#home" icon={<LayoutGrid className="w-5 h-5" />} label="Home" active={activeSection === "home"} onClick={handleHeroNav("collapse")} />
         <MobileNavLink href="/#about" icon={<User className="w-5 h-5" />} label="About" active={activeSection === "about"} onClick={handleHeroNav("expand")} />
         <MobileNavLink href="/#projects" icon={<Layers className="w-5 h-5" />} label="Projects" active={activeSection === "projects"} />
@@ -103,12 +106,12 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`flex flex-col items-center justify-center px-4 py-2 rounded-xl transition-all ${
+      className={`flex flex-1 flex-col items-center justify-center px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 rounded-xl transition-all ${
         active ? "text-primary bg-primary/10" : "text-on-surface hover:bg-primary/5"
       }`}
     >
       {icon}
-      <span className="font-label text-[10px] uppercase tracking-widest mt-1">{label}</span>
+      <span className="font-label text-[9px] xs:text-[10px] uppercase tracking-widest mt-1 whitespace-nowrap">{label}</span>
     </Link>
   );
 }

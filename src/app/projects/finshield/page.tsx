@@ -4,15 +4,15 @@ import finshieldImg from "@/app/images/Projects/finshield.png";
 
 export default function FinShieldPage() {
   return (
-    <div className="pt-32 pb-24 max-w-4xl mx-auto px-6">
+    <div className="pt-28 sm:pt-32 pb-16 sm:pb-24 max-w-4xl mx-auto px-4 sm:px-6">
       <Link href="/#projects" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8">
         <ArrowLeft className="w-4 h-4" /> Back to Projects
       </Link>
-      
-      <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">FinShield</h1>
-      <p className="text-xl text-blue-400 mb-12">Secure Invoice Audit & Verification</p>
-      
-      <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
+
+      <h1 className="text-3xl xs:text-4xl md:text-6xl font-bold tracking-tight mb-6">FinShield</h1>
+      <p className="text-lg sm:text-xl text-blue-400 mb-8 sm:mb-12">Secure Invoice Audit & Verification</p>
+
+      <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-10 sm:mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
         <img 
           src={finshieldImg.src} 
           alt="FinShield Project Screenshot" 

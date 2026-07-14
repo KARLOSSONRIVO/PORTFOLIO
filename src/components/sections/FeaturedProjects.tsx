@@ -43,20 +43,20 @@ export function FeaturedProjects() {
   const { ref: gridRef, isInView: gridInView } = useScrollReveal({ margin: "-60px" });
 
   return (
-    <section id="projects" className="py-32 px-8 md:px-24 bg-surface-container-low">
+    <section id="projects" className="py-20 sm:py-24 md:py-32 section-px bg-surface-container-low">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading row */}
         <motion.div
           ref={headingRef}
-          className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8"
+          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-14 md:mb-20 gap-4 sm:gap-8"
           initial="hidden"
           animate={headingInView ? "visible" : "hidden"}
         >
           <motion.h2
             custom={0}
             variants={fadeUp}
-            className="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter"
+            className="font-headline font-black text-heading uppercase tracking-tighter"
           >
             Featured <br /><span className="text-primary">Projects</span>
           </motion.h2>
@@ -72,16 +72,16 @@ export function FeaturedProjects() {
         {/* Cards grid */}
         <motion.div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12"
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
           {projects.map((project, i) => (
-            <motion.div key={project.id} custom={i} variants={fadeUp}>
+            <motion.div key={project.id} custom={i} variants={fadeUp} className="min-w-0">
               <Link href={`/projects/${project.id}`} className="block group">
-                <div className="relative glass-panel p-8 rounded-xl shadow-[0_0_40px_rgba(220,20,60,0.08)] flex flex-col h-full overflow-hidden">
+                <div className="relative glass-panel p-5 sm:p-6 md:p-8 rounded-xl shadow-[0_0_40px_rgba(220,20,60,0.08)] flex flex-col h-full overflow-hidden">
                   {/* Project Image */}
-                  <div className="aspect-video w-full mb-8 overflow-hidden rounded-lg bg-zinc-900">
+                  <div className="aspect-video w-full mb-6 sm:mb-8 overflow-hidden rounded-lg bg-zinc-900">
                     <img
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
@@ -89,14 +89,14 @@ export function FeaturedProjects() {
                     />
                   </div>
 
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="font-headline font-bold text-3xl uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors">
+                  <div className="flex justify-between items-start gap-3 mb-4">
+                    <h3 className="min-w-0 font-headline font-bold text-2xl sm:text-3xl uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <ArrowUpRight className="text-primary w-8 h-8 opacity-0 group-hover:opacity-100 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
+                    <ArrowUpRight className="shrink-0 text-primary w-8 h-8 opacity-0 group-hover:opacity-100 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
                   </div>
 
-                  <p className="font-body text-on-surface-variant mb-8 flex-grow text-lg">
+                  <p className="font-body text-on-surface-variant mb-6 sm:mb-8 flex-grow text-base sm:text-lg">
                     {project.description}
                   </p>
 

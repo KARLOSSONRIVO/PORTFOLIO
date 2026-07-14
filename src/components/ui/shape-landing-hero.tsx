@@ -289,10 +289,10 @@ function HeroGeometric({
 
     const wBase = isMobile ? 300 : 380;
     const wGrowth = isMobile ? 650 : 1250;
-    const hBase = isMobile ? 260 : 320;
-    const hGrowth = isMobile ? 300 : 520;
+    const hBase = isMobile ? 280 : 320;
+    const hGrowth = isMobile ? 420 : 520;
     const cardW = `min(${wBase + scrollProgress * wGrowth}px, ${isMobile ? "95vw" : "98vw"})`;
-    const cardH = `min(${hBase + scrollProgress * hGrowth}px, ${isMobile ? "90dvh" : "95dvh"})`;
+    const cardH = `min(${hBase + scrollProgress * hGrowth}px, ${isMobile ? "94dvh" : "95dvh"})`;
     const borderRad = `${Math.max(24 - scrollProgress * 24, 0)}px`;
     const tx = scrollProgress * (isMobile ? 35 : 25);
 
@@ -368,15 +368,15 @@ function HeroGeometric({
                         animate={{ opacity: showContent ? 1 : 0 }}
                         transition={{ duration: 0.7 }}
                     >
-                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24 items-center px-8 py-16 md:px-16">
+                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 sm:gap-10 md:gap-24 items-center px-5 py-10 sm:px-8 sm:py-12 md:px-16 md:py-16">
                             <motion.div
                                 custom={0}
                                 variants={fadeUp}
                                 initial="hidden"
                                 animate={showContent ? "visible" : "hidden"}
-                                className="w-full md:w-2/5 shrink-0"
+                                className="w-full md:w-2/5 shrink-0 min-w-0"
                             >
-                                <div className="relative w-full aspect-[4/5] bg-surface-container overflow-hidden rounded-xl">
+                                <div className="relative w-full aspect-[16/10] sm:aspect-[4/5] bg-surface-container overflow-hidden rounded-xl">
                                     <img
                                         alt="Karlos Rivo"
                                         className="w-full h-full object-cover grayscale opacity-60 transition-transform duration-700 hover:scale-105 hover:grayscale-0 hover:opacity-100"
@@ -386,13 +386,13 @@ function HeroGeometric({
                                 </div>
                             </motion.div>
 
-                            <div className="w-full md:w-3/5">
+                            <div className="w-full md:w-3/5 min-w-0">
                                 <motion.h2
                                     custom={1}
                                     variants={fadeUp}
                                     initial="hidden"
                                     animate={showContent ? "visible" : "hidden"}
-                                    className="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter mb-8 leading-tight"
+                                    className="font-headline font-black text-heading uppercase tracking-tighter mb-4 sm:mb-6 md:mb-8 leading-tight"
                                 >
                                     About <br /><span className="text-primary">Me</span>
                                 </motion.h2>
@@ -402,7 +402,7 @@ function HeroGeometric({
                                     variants={fadeUp}
                                     initial="hidden"
                                     animate={showContent ? "visible" : "hidden"}
-                                    className="space-y-5 font-body text-lg text-on-surface-variant leading-relaxed"
+                                    className="space-y-3 sm:space-y-5 font-body text-base sm:text-lg text-on-surface-variant leading-relaxed"
                                 >
                                     <p>
                                         I am a passionate software developer focused on designing and engineering high-quality, impactful systems. My primary domains of interest include full-stack web development, backend engineering, secure architecture, and implementing AI-driven features to solve real-world problems.
@@ -417,19 +417,19 @@ function HeroGeometric({
                                     variants={fadeUp}
                                     initial="hidden"
                                     animate={showContent ? "visible" : "hidden"}
-                                    className="mt-10 pt-8 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-3 gap-8"
+                                    className="mt-6 pt-5 sm:mt-10 sm:pt-8 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8"
                                 >
                                     <div>
                                         <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Background</p>
-                                        <p className="font-headline font-bold text-xl uppercase tracking-tight">Full-Stack Dev</p>
+                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">Full-Stack Dev</p>
                                     </div>
                                     <div>
                                         <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Specialization</p>
-                                        <p className="font-headline font-bold text-xl uppercase tracking-tight">Backend & Security</p>
+                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">Backend & Security</p>
                                     </div>
                                     <div>
                                         <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Emerging Focus</p>
-                                        <p className="font-headline font-bold text-xl uppercase tracking-tight">AI_DEVELOPMENT</p>
+                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">AI_DEVELOPMENT</p>
                                     </div>
                                 </motion.div>
                             </div>
@@ -463,7 +463,7 @@ function HeroGeometric({
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.55 }}
-                        className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-center px-4"
+                        className="text-display font-bold tracking-tight text-center px-4"
                         style={{ transform: `translateX(-${tx}vw)` }}
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
@@ -475,7 +475,7 @@ function HeroGeometric({
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.7 }}
-                        className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-center px-4"
+                        className="text-display font-bold tracking-tight text-center px-4"
                         style={{ transform: `translateX(${tx}vw)` }}
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-white/90 to-red-600">

@@ -44,18 +44,18 @@ export function TechStack() {
   const { ref: gridRef, isInView: gridInView } = useScrollReveal({ margin: "-40px" });
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-surface-container-low">
+    <section className="py-20 sm:py-24 md:py-32 section-px bg-surface-container-low">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
         <motion.div
           ref={headingRef}
-          className="text-center mb-24"
+          className="text-center mb-12 sm:mb-16 md:mb-24"
           initial={{ opacity: 0, y: 40 }}
           animate={headingInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <h2 className="font-headline font-black text-4xl md:text-5xl uppercase tracking-tighter mb-4">
+          <h2 className="font-headline font-black text-heading-sm uppercase tracking-tighter mb-4">
             Tech <span className="text-primary">Stack</span>
           </h2>
           <p className="font-label text-on-surface-variant uppercase tracking-[0.3em] text-[10px]">
@@ -66,7 +66,7 @@ export function TechStack() {
         {/* Icons grid — staggered */}
         <motion.div
           ref={gridRef}
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-6"
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
@@ -75,7 +75,7 @@ export function TechStack() {
               key={tool.name}
               custom={i}
               variants={cardVariants}
-              className="bg-surface-container-high/40 border border-outline-variant/10 p-8 rounded-xl flex flex-col items-center justify-center hover:bg-primary-container/10 transition-all group shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_0_20px_rgba(220,20,60,0.1)] cursor-default"
+              className="min-w-0 bg-surface-container-high/40 border border-outline-variant/10 p-4 sm:p-6 md:p-8 rounded-xl flex flex-col items-center justify-center hover:bg-primary-container/10 transition-all group shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_0_20px_rgba(220,20,60,0.1)] cursor-default"
             >
               {tool.icon}
               <span className="font-label text-[10px] uppercase tracking-widest text-on-surface">
