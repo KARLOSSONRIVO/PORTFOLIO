@@ -290,9 +290,9 @@ function HeroGeometric({
     const wBase = isMobile ? 300 : 380;
     const wGrowth = isMobile ? 650 : 1250;
     const hBase = isMobile ? 280 : 320;
-    const hGrowth = isMobile ? 420 : 520;
+    const hGrowth = isMobile ? 900 : 520;
     const cardW = `min(${wBase + scrollProgress * wGrowth}px, ${isMobile ? "95vw" : "98vw"})`;
-    const cardH = `min(${hBase + scrollProgress * hGrowth}px, ${isMobile ? "94dvh" : "95dvh"})`;
+    const cardH = `min(${hBase + scrollProgress * hGrowth}px, ${isMobile ? "100dvh" : "95dvh"})`;
     const borderRad = `${Math.max(24 - scrollProgress * 24, 0)}px`;
     const tx = scrollProgress * (isMobile ? 35 : 25);
 
@@ -368,7 +368,7 @@ function HeroGeometric({
                         animate={{ opacity: showContent ? 1 : 0 }}
                         transition={{ duration: 0.7 }}
                     >
-                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 sm:gap-10 md:gap-24 items-center px-5 py-10 sm:px-8 sm:py-12 md:px-16 md:py-16">
+                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 sm:gap-10 md:gap-24 items-center px-4 py-6 sm:px-8 sm:py-12 md:px-16 md:py-16">
                             <motion.div
                                 custom={0}
                                 variants={fadeUp}
@@ -376,7 +376,7 @@ function HeroGeometric({
                                 animate={showContent ? "visible" : "hidden"}
                                 className="w-full md:w-2/5 shrink-0 min-w-0"
                             >
-                                <div className="relative w-full aspect-[16/10] sm:aspect-[4/5] bg-surface-container overflow-hidden rounded-xl">
+                                <div className="relative w-full aspect-[2/1] sm:aspect-[4/5] bg-surface-container overflow-hidden rounded-xl">
                                     <img
                                         alt="Karlos Rivo"
                                         className="w-full h-full object-cover grayscale opacity-60 transition-transform duration-700 hover:scale-105 hover:grayscale-0 hover:opacity-100"
@@ -417,19 +417,19 @@ function HeroGeometric({
                                     variants={fadeUp}
                                     initial="hidden"
                                     animate={showContent ? "visible" : "hidden"}
-                                    className="mt-6 pt-5 sm:mt-10 sm:pt-8 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8"
+                                    className="mt-4 pt-4 sm:mt-10 sm:pt-8 border-t border-outline-variant/30 grid grid-cols-3 gap-2 sm:gap-8"
                                 >
                                     <div>
-                                        <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Background</p>
-                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">Full-Stack Dev</p>
+                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Background</p>
+                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">Full-Stack Dev</p>
                                     </div>
                                     <div>
-                                        <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Specialization</p>
-                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">Backend & Security</p>
+                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Specialization</p>
+                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">Backend & Security</p>
                                     </div>
                                     <div>
-                                        <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">Emerging Focus</p>
-                                        <p className="font-headline font-bold text-lg sm:text-xl uppercase tracking-tight">AI_DEVELOPMENT</p>
+                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Emerging Focus</p>
+                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">AI_DEVELOPMENT</p>
                                     </div>
                                 </motion.div>
                             </div>
