@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Karlos Rivo - Developer Portfolio",
+  title: "Karlos Son P. Rivo - Developer Portfolio",
   description: "Modern portfolio focused on CarbonSense and FinShield, showcasing intelligent and impactful systems.",
 };
 
@@ -30,8 +30,21 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
+        <Script id="site-preferences" strategy="beforeInteractive">
+          {`
+            (function () {
+              var root = document.documentElement;
+              root.dataset.theme = "dark";
+              root.dataset.motionPaused = "false";
+              try {
+                root.dataset.theme = localStorage.getItem("portfolio-theme") === "light" ? "light" : "dark";
+                root.dataset.motionPaused = String(localStorage.getItem("portfolio-motion-paused") === "true");
+              } catch (_) {}
+            })();
+          `}
+        </Script>
         <LenisProvider>
           <Navbar />
           <main className="flex-1 w-full">{children}</main>

@@ -1,65 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Circle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-
-function ElegantShape({
-    className,
-    delay = 0,
-    width = 400,
-    height = 100,
-    rotate = 0,
-    gradient = "from-white/[0.08]",
-}: {
-    className?: string;
-    delay?: number;
-    width?: number;
-    height?: number;
-    rotate?: number;
-    gradient?: string;
-}) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
-            animate={{ opacity: 1, y: 0, rotate }}
-            transition={{
-                duration: 2.4,
-                delay,
-                ease: [0.23, 0.86, 0.39, 0.96],
-                opacity: { duration: 1.2 },
-            }}
-            className={cn("absolute", className)}
-        >
-            <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                style={{ width, height }}
-                className="relative"
-            >
-                <div
-                    className={cn(
-                        "absolute inset-0 rounded-full",
-                        "bg-gradient-to-r to-transparent",
-                        gradient,
-                        "backdrop-blur-[2px] border-2 border-white/[0.15]",
-                        "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-                        "after:absolute after:inset-0 after:rounded-full",
-                        "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
-                    )}
-                />
-            </motion.div>
-        </motion.div>
-    );
-}
+import { AboutProfile } from "@/components/ui/AboutProfile";
+import { PortraitIntro } from "@/components/ui/PortraitIntro";
 
 function HeroGeometric({
-    badge = "Design Collective",
+    name = "KARLOS SON P. RIVO",
+    subtitle = "I build thoughtful software, from the interface to the systems behind it.",
     title1 = "Elevate Your Digital Vision",
     title2 = "Crafting Exceptional Websites",
 }: {
-    badge?: string;
+    name?: string;
     title1?: string;
     title2?: string;
     subtitle?: string;
@@ -69,28 +21,46 @@ function HeroGeometric({
     const [showContent, setShowContent] = useState(false);
     // scrollReady gates body-overflow unlock until content has fully faded in
     const [scrollReady, setScrollReady] = useState(false);
-    // animationKey increments on every collapse → forces Framer Motion to replay entrance animations
-    const [animationKey, setAnimationKey] = useState(0);
     const [touchStartY, setTouchStartY] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [viewportHeight, setViewportHeight] = useState(0);
+    const [aboutHeight, setAboutHeight] = useState(0);
+    const aboutContentRef = useRef<HTMLDivElement>(null);
 
     const progressRef = useRef(0);
     const expandedRef = useRef(false);
-    const showContentRef = useRef(false);
     const contentTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const scrollReadyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     // RAF handle for navbar-triggered animations
     const navRafRef = useRef<number>(0);
+    const pendingSectionRef = useRef<"projects" | "contact" | undefined>(undefined);
+
+    useEffect(() => () => {
+        if (contentTimerRef.current) clearTimeout(contentTimerRef.current);
+        if (scrollReadyTimerRef.current) clearTimeout(scrollReadyTimerRef.current);
+    }, []);
 
     useEffect(() => { progressRef.current = scrollProgress; }, [scrollProgress]);
     useEffect(() => { expandedRef.current = expanded; }, [expanded]);
-    useEffect(() => { showContentRef.current = showContent; }, [showContent]);
 
     useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 768);
+        const check = () => {
+            setIsMobile(window.innerWidth < 768);
+            setViewportHeight(window.innerHeight);
+        };
         check();
         window.addEventListener("resize", check);
         return () => window.removeEventListener("resize", check);
+    }, []);
+
+    // Measure intrinsic content, not a viewport-sized scroll panel. Width/font
+    // changes can reflow the records, so keep the expansion target up to date.
+    useEffect(() => {
+        const content = aboutContentRef.current;
+        if (!content) return;
+        const observer = new ResizeObserver(([entry]) => setAboutHeight(Math.ceil(entry.contentRect.height)));
+        observer.observe(content);
+        return () => observer.disconnect();
     }, []);
 
     // Lock body scroll until content is fully faded in (scrollReady)
@@ -101,6 +71,15 @@ function HeroGeometric({
         } else {
             document.body.style.overflow = "";
             document.documentElement.style.overflow = "";
+            const target = pendingSectionRef.current;
+            if (target) {
+                pendingSectionRef.current = undefined;
+                window.history.pushState(null, "", `/#${target}`);
+                document.getElementById(target)?.scrollIntoView({ behavior: "instant" });
+            } else if (window.location.hash === "#about") {
+                // The browser may have anchored to About while its card was still collapsed.
+                window.scrollTo({ top: 0, behavior: "instant" });
+            }
         }
         return () => {
             document.body.style.overflow = "";
@@ -110,10 +89,17 @@ function HeroGeometric({
 
     // Single persistent event handler — handles both expansion AND collapse
     useEffect(() => {
+        const canScrollPanel = (target: EventTarget | null, delta: number) => {
+            const intro = target instanceof Element ? target.closest<HTMLElement>(".portrait-intro") : null;
+            if (!intro || intro.scrollHeight <= intro.clientHeight + 2) return false;
+            return delta > 0 ? intro.scrollTop + intro.clientHeight < intro.scrollHeight - 2 : intro.scrollTop > 0;
+        };
         const handleWheel = (e: WheelEvent) => {
+            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
             const exp = expandedRef.current;
 
             if (exp) {
+                if (canScrollPanel(e.target, e.deltaY)) return;
                 // Fully expanded: only intercept scroll-up at the very top of page
                 if (window.scrollY <= 2 && e.deltaY < 0) {
                     e.preventDefault();
@@ -121,7 +107,6 @@ function HeroGeometric({
                     setExpanded(false);
                     setShowContent(false);
                     setScrollReady(false);
-                    setAnimationKey(k => k + 1);
                     if (contentTimerRef.current) clearTimeout(contentTimerRef.current);
                     if (scrollReadyTimerRef.current) clearTimeout(scrollReadyTimerRef.current);
                     // Signal navbar back to "home"
@@ -131,7 +116,8 @@ function HeroGeometric({
                 return;
             }
 
-            // Not yet expanded: intercept all scroll to drive the animation
+            if (canScrollPanel(e.target, e.deltaY)) return;
+            // After the responsive intro has been read, scroll drives expansion.
             e.preventDefault();
             const delta = e.deltaY * 0.0012;
             const next = Math.min(Math.max(progressRef.current + delta, 0), 1);
@@ -151,13 +137,19 @@ function HeroGeometric({
         };
 
         const handleTouchStart = (e: TouchEvent) => {
+            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
             setTouchStartY(e.touches[0].clientY);
         };
 
         const handleTouchMove = (e: TouchEvent) => {
+            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
             const exp = expandedRef.current;
             const touchY = e.touches[0].clientY;
             const deltaY = touchStartY - touchY;
+            if (canScrollPanel(e.target, deltaY)) {
+                setTouchStartY(touchY);
+                return;
+            }
 
             if (exp) {
                 if (window.scrollY <= 2 && deltaY < -20) {
@@ -165,7 +157,6 @@ function HeroGeometric({
                     setExpanded(false);
                     setShowContent(false);
                     setScrollReady(false);
-                    setAnimationKey(k => k + 1);
                     if (contentTimerRef.current) clearTimeout(contentTimerRef.current);
                     if (scrollReadyTimerRef.current) clearTimeout(scrollReadyTimerRef.current);
                     window.dispatchEvent(new CustomEvent("heroSectionChange", { detail: { section: "home" } }));
@@ -212,11 +203,19 @@ function HeroGeometric({
         const easeInOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
         const handleNavRequest = (e: Event) => {
-            const custom = e as CustomEvent<{ action: "expand" | "collapse" }>;
+            const custom = e as CustomEvent<{ action: "expand" | "collapse"; target?: "projects" | "contact" }>;
             cancelAnimationFrame(navRafRef.current);
 
             if (custom.detail.action === "expand") {
-                if (expandedRef.current) return;
+                pendingSectionRef.current = custom.detail.target;
+                if (expandedRef.current) {
+                    if (!custom.detail.target || document.body.style.overflow !== "hidden") {
+                        const target = custom.detail.target ?? "about";
+                        if (window.location.hash !== `#${target}`) window.history.pushState(null, "", `/#${target}`);
+                        window.dispatchEvent(new CustomEvent("heroSectionChange", { detail: { section: "about", scrollTarget: target } }));
+                    }
+                    return;
+                }
                 const startProgress = progressRef.current;
                 const startTime = performance.now();
                 const duration = Math.max(350, (1 - startProgress) * 700);
@@ -246,15 +245,16 @@ function HeroGeometric({
                 navRafRef.current = requestAnimationFrame(tick);
 
             } else if (custom.detail.action === "collapse") {
+                pendingSectionRef.current = undefined;
                 if (!expandedRef.current) return;
                 // Scroll back to the very top first (in case Lenis moved it)
                 window.scrollTo({ top: 0, behavior: "instant" });
+                document.querySelector(".portrait-intro")?.scrollTo({ top: 0, behavior: "instant" });
 
                 setExpanded(false);
                 expandedRef.current = false;
                 setShowContent(false);
                 setScrollReady(false);
-                setAnimationKey(k => k + 1);
                 if (contentTimerRef.current) clearTimeout(contentTimerRef.current);
                 if (scrollReadyTimerRef.current) clearTimeout(scrollReadyTimerRef.current);
                 window.dispatchEvent(new CustomEvent("heroSectionChange", { detail: { section: "home" } }));
@@ -281,7 +281,16 @@ function HeroGeometric({
         };
 
         window.addEventListener("heroNavRequest", handleNavRequest);
+        const initialTarget = window.location.hash.slice(1);
+        const initialRaf = requestAnimationFrame(() => {
+            if (["about", "projects", "contact"].includes(initialTarget)) {
+                window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: {
+                    action: "expand", target: initialTarget === "about" ? undefined : initialTarget,
+                } }));
+            }
+        });
         return () => {
+            cancelAnimationFrame(initialRaf);
             window.removeEventListener("heroNavRequest", handleNavRequest);
             cancelAnimationFrame(navRafRef.current);
         };
@@ -290,50 +299,26 @@ function HeroGeometric({
     const wBase = isMobile ? 300 : 380;
     const wGrowth = isMobile ? 650 : 1250;
     const hBase = isMobile ? 280 : 320;
-    const hGrowth = isMobile ? 900 : 520;
     const cardW = `min(${wBase + scrollProgress * wGrowth}px, ${isMobile ? "95vw" : "98vw"})`;
-    const cardH = `min(${hBase + scrollProgress * hGrowth}px, ${isMobile ? "100dvh" : "95dvh"})`;
+    const expandedHeight = Math.max(aboutHeight, viewportHeight - 32, hBase);
+    const cardHeight = hBase + scrollProgress * (expandedHeight - hBase);
+    const sectionHeight = Math.max(viewportHeight, cardHeight + 32);
     const borderRad = `${Math.max(24 - scrollProgress * 24, 0)}px`;
-    const tx = scrollProgress * (isMobile ? 35 : 25);
-
-    const fadeUp = {
-        hidden: { opacity: 0, y: 24 },
-        visible: (i: number) => ({
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.8, delay: 0.1 + i * 0.15, ease: [0.25, 0.4, 0.25, 1] as const },
-        }),
-    };
 
     return (
-        <div className="relative w-full overflow-x-hidden bg-[#030303]" style={{ minHeight: "100dvh" }}>
-            {/* Ambient glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.05] via-transparent to-red-900/[0.05] blur-3xl pointer-events-none" />
-
-            {/* Floating crimson shapes — key forces remount on collapse to replay entrance animations */}
-            <motion.div
-                key={`shapes-${animationKey}`}
-                className="absolute inset-0 overflow-hidden pointer-events-none"
-                animate={{ opacity: 1 - scrollProgress * 1.6 }}
-                transition={{ duration: 0.05 }}
-            >
-                <ElegantShape delay={0.3} width={600} height={140} rotate={12} gradient="from-red-600/[0.15]" className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]" />
-                <ElegantShape delay={0.5} width={500} height={120} rotate={-15} gradient="from-red-500/[0.15]" className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]" />
-                <ElegantShape delay={0.4} width={300} height={80} rotate={-8} gradient="from-red-700/[0.15]" className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]" />
-                <ElegantShape delay={0.6} width={200} height={60} rotate={20} gradient="from-red-800/[0.15]" className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]" />
-                <ElegantShape delay={0.7} width={150} height={40} rotate={-25} gradient="from-red-600/[0.15]" className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]" />
-            </motion.div>
-
+        <div className="relative w-full overflow-x-hidden bg-background" style={{ minHeight: "100dvh" }}>
             <section
                 id="home"
-                className="sticky top-0 flex items-center justify-center"
-                style={{ height: "100dvh" }}
+                className="relative flex items-center justify-center"
+                style={{ height: viewportHeight ? sectionHeight : "100dvh" }}
             >
                 {/* ── Expanding card ── */}
                 <div
                     style={{
                         width: cardW,
-                        height: cardH,
+                        opacity: scrollProgress,
+                        pointerEvents: showContent ? "auto" : "none",
+                        height: cardHeight,
                         borderRadius: borderRad,
                         overflow: "hidden",
                         position: "relative",
@@ -341,18 +326,7 @@ function HeroGeometric({
                         zIndex: 10,
                     }}
                 >
-                    {/* Card BG grid */}
-                    <div className="absolute inset-0 bg-[#0a0a0a]">
-                        <div
-                            className="absolute inset-0"
-                            style={{
-                                backgroundImage: "linear-gradient(to right, #DC143C1A 1px, transparent 1px), linear-gradient(to bottom, #DC143C1A 1px, transparent 1px)",
-                                backgroundSize: "40px 40px",
-                                opacity: 0.3 + scrollProgress * 0.4,
-                            }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-transparent to-red-950/10" />
-                    </div>
+                    <div className="about-background absolute inset-0" />
 
                     {/* Darkening overlay */}
                     <motion.div
@@ -363,131 +337,29 @@ function HeroGeometric({
 
                     {/* ── About Me content ── */}
                     <motion.div
-                        className="relative z-10 w-full h-full overflow-y-auto"
+                        id="about"
+                        inert={!showContent}
+                        tabIndex={showContent ? 0 : -1}
+                        role="region"
+                        aria-labelledby="about-profile-title"
+                        className="about-region relative z-10 w-full"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: showContent ? 1 : 0 }}
                         transition={{ duration: 0.7 }}
                     >
-                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 sm:gap-10 md:gap-24 items-center px-4 py-6 sm:px-8 sm:py-12 md:px-16 md:py-16">
-                            <motion.div
-                                custom={0}
-                                variants={fadeUp}
-                                initial="hidden"
-                                animate={showContent ? "visible" : "hidden"}
-                                className="w-full md:w-2/5 shrink-0 min-w-0"
-                            >
-                                <div className="relative w-full aspect-[2/1] sm:aspect-[4/5] bg-surface-container overflow-hidden rounded-xl">
-                                    <img
-                                        alt="Karlos Rivo"
-                                        className="w-full h-full object-cover grayscale opacity-60 transition-transform duration-700 hover:scale-105 hover:grayscale-0 hover:opacity-100"
-                                        src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent pointer-events-none" />
-                                </div>
-                            </motion.div>
-
-                            <div className="w-full md:w-3/5 min-w-0">
-                                <motion.h2
-                                    custom={1}
-                                    variants={fadeUp}
-                                    initial="hidden"
-                                    animate={showContent ? "visible" : "hidden"}
-                                    className="font-headline font-black text-heading uppercase tracking-tighter mb-4 sm:mb-6 md:mb-8 leading-tight"
-                                >
-                                    About <br /><span className="text-primary">Me</span>
-                                </motion.h2>
-
-                                <motion.div
-                                    custom={2}
-                                    variants={fadeUp}
-                                    initial="hidden"
-                                    animate={showContent ? "visible" : "hidden"}
-                                    className="space-y-3 sm:space-y-5 font-body text-base sm:text-lg text-on-surface-variant leading-relaxed"
-                                >
-                                    <p>
-                                        I am a passionate software developer focused on designing and engineering high-quality, impactful systems. My primary domains of interest include full-stack web development, backend engineering, secure architecture, and implementing AI-driven features to solve real-world problems.
-                                    </p>
-                                    <p>
-                                        My focus lies in building robust foundations: backend orchestration, database optimization, and high-performance APIs. I believe in software that is clean, secure, and highly scalable.
-                                    </p>
-                                </motion.div>
-
-                                <motion.div
-                                    custom={3}
-                                    variants={fadeUp}
-                                    initial="hidden"
-                                    animate={showContent ? "visible" : "hidden"}
-                                    className="mt-4 pt-4 sm:mt-10 sm:pt-8 border-t border-outline-variant/30 grid grid-cols-3 gap-2 sm:gap-8"
-                                >
-                                    <div>
-                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Background</p>
-                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">Full-Stack Dev</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Specialization</p>
-                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">Backend & Security</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-label text-primary text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2">Emerging Focus</p>
-                                        <p className="font-headline font-bold text-xs sm:text-xl uppercase tracking-tight">AI_DEVELOPMENT</p>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </div>
-
-
+                        <div ref={aboutContentRef}><AboutProfile active={showContent} /></div>
                     </motion.div>
                 </div>
 
-                {/* ── Floating title that splits apart during expansion ── */}
                 <motion.div
-                    key={`title-${animationKey}`}
-                    className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-20"
-                    animate={{ opacity: showContent ? 0 : 1 }}
-                    transition={{ duration: 0.25 }}
+                    className="absolute inset-x-0 top-0 h-dvh z-20"
+                    inert={expanded}
+                    style={{ pointerEvents: expanded ? "none" : "auto" }}
+                    animate={{ opacity: Math.max(1 - scrollProgress * 1.7, 0) }}
+                    transition={{ duration: 0.15 }}
                 >
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="mb-5"
-                        style={{ transform: `translateX(-${tx}vw)` }}
-                    >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">
-                            <Circle className="h-2 w-2 fill-red-500/80" />
-                            <span className="text-sm text-white/60 tracking-wide">{badge}</span>
-                        </div>
-                    </motion.div>
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.55 }}
-                        className="text-display font-bold tracking-tight text-center px-4"
-                        style={{ transform: `translateX(-${tx}vw)` }}
-                    >
-                        <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
-                            {title1}
-                        </span>
-                    </motion.h1>
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.7 }}
-                        className="text-display font-bold tracking-tight text-center px-4"
-                        style={{ transform: `translateX(${tx}vw)` }}
-                    >
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-white/90 to-red-600">
-                            {title2}
-                        </span>
-                    </motion.h1>
-
-
+                    <PortraitIntro name={name} role={title1 + " " + title2} subtitle={subtitle} active={!expanded && scrollProgress < 0.1} />
                 </motion.div>
-
-                {/* Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none z-0" />
             </section>
         </div>
     );

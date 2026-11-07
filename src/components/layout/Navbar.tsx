@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { LayoutGrid, Layers, User, Mail, Component } from "lucide-react";
+import { PreferenceControls } from "@/components/ui/PreferenceControls";
 import { usePathname } from "next/navigation";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
@@ -17,32 +18,38 @@ export function Navbar() {
     window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: { action } }));
   };
 
+  const handleSectionNav = (target: "projects" | "contact") => (e: React.MouseEvent) => {
+    if (pathname !== "/") return;
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: { action: "expand", target } }));
+  };
+
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-gradient-to-b from-surface to-transparent pointer-events-none">
-        <nav className="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 max-w-full mx-auto pointer-events-auto">
-          <Link href="/" onClick={handleHeroNav("collapse")} className="flex items-center gap-1.5 sm:gap-2 group min-w-0">
-            <Component className="text-primary w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 shrink-0 group-hover:rotate-180 transition-transform duration-700" />
-            <span className="text-base xs:text-lg sm:text-xl md:text-2xl font-black tracking-[-0.04em] text-primary font-headline uppercase truncate">
-              Karlos Rivo
-            </span>
-          </Link>
-          <div className="hidden md:flex gap-8 items-center font-label text-[12px] uppercase tracking-widest">
+      <Link href="/" onClick={handleHeroNav("collapse")} className="site-brand" aria-label="Karlos Son Rivo — Home">
+        <Component aria-hidden="true" />
+        <span>Karlos Son Rivo</span>
+      </Link>
+      <header className="desktop-nav-header">
+        <nav aria-label="Main navigation" className="desktop-nav-shell">
+          <div className="desktop-nav-links">
             <NavLink href="/#home" active={activeSection === "home"} onClick={handleHeroNav("collapse")}>
               Home
             </NavLink>
             <NavLink href="/#about" active={activeSection === "about"} onClick={handleHeroNav("expand")}>
               About
             </NavLink>
-            <NavLink href="/#projects" active={activeSection === "projects"}>
+            <NavLink href="/#projects" active={activeSection === "projects"} onClick={handleSectionNav("projects")}>
               Projects
             </NavLink>
-            <NavLink href="/#contact" active={activeSection === "contact"}>
+            <NavLink href="/#contact" active={activeSection === "contact"} onClick={handleSectionNav("contact")}>
               Contact
             </NavLink>
           </div>
+          <PreferenceControls />
         </nav>
       </header>
+      <div className="mobile-preference-controls"><PreferenceControls /></div>
 
       {/* Mobile Bottom Navigation */}
       <nav
@@ -51,8 +58,8 @@ export function Navbar() {
       >
         <MobileNavLink href="/#home" icon={<LayoutGrid className="w-5 h-5" />} label="Home" active={activeSection === "home"} onClick={handleHeroNav("collapse")} />
         <MobileNavLink href="/#about" icon={<User className="w-5 h-5" />} label="About" active={activeSection === "about"} onClick={handleHeroNav("expand")} />
-        <MobileNavLink href="/#projects" icon={<Layers className="w-5 h-5" />} label="Projects" active={activeSection === "projects"} />
-        <MobileNavLink href="/#contact" icon={<Mail className="w-5 h-5" />} label="Contact" active={activeSection === "contact"} />
+        <MobileNavLink href="/#projects" icon={<Layers className="w-5 h-5" />} label="Projects" active={activeSection === "projects"} onClick={handleSectionNav("projects")} />
+        <MobileNavLink href="/#contact" icon={<Mail className="w-5 h-5" />} label="Contact" active={activeSection === "contact"} onClick={handleSectionNav("contact")} />
       </nav>
     </>
   );
@@ -73,15 +80,14 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`transition-colors duration-300 relative ${
-        active ? "text-primary" : "text-on-surface hover:text-primary"
-      }`}
+      className="desktop-nav-link"
+      aria-current={active ? "location" : undefined}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
       {active && (
         <motion.div
           layoutId="navbar-active"
-          className="absolute -bottom-1 left-0 right-0 h-px bg-primary"
+          className="desktop-nav-active"
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
       )}

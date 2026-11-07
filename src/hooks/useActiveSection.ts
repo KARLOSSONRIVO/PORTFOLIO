@@ -23,10 +23,7 @@ export function useActiveSection(): string {
   const [scrollSection, setScrollSection] = useState("");
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setScrollSection(pathname.includes("/projects") ? "projects" : "");
-      return;
-    }
+    if (pathname !== "/") return;
 
     // Hero fires this event when card state changes (home ↔ about)
     const handleHeroSection = (e: Event) => {
@@ -69,5 +66,5 @@ export function useActiveSection(): string {
   }, [pathname]);
 
   // Scroll-based section takes priority when inside the page body
-  return scrollSection || heroSection;
+  return pathname !== "/" ? (pathname.includes("/projects") ? "projects" : "") : scrollSection || heroSection;
 }

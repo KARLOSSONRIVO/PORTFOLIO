@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "aws-fundamentals",
+    "title": "AWS Fundamentals Elective",
+    "width": 792.0,
+    "height": 612.0,
+    "source": "Karlos Son Rivo Certificate.pdf",
+    "conversion": "PDF vector artwork with outlined text and original embedded images"
+  },
+  {
+    "slug": "egovph-hackathon",
+    "title": "eGovPH Hackathon 2026",
+    "width": 3753,
+    "height": 2652,
+    "source": "KARLOS SON RIVO.png",
+    "conversion": "Original PNG embedded losslessly; raster artwork in SVG"
+  },
+  {
+    "slug": "meta-android",
+    "title": "Introduction to Android Mobile Application Development",
+    "width": 792.0,
+    "height": 612.0,
+    "source": "Coursera 15NOYM97848G.pdf",
+    "conversion": "PDF vector artwork with outlined text and original embedded images"
+  }
+]

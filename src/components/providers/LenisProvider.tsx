@@ -50,11 +50,22 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     const startTimer = { id: undefined as ReturnType<typeof setTimeout> | undefined };
 
     const handleHeroSection = (e: Event) => {
-      const custom = e as CustomEvent<{ section: string }>;
+      const custom = e as CustomEvent<{ section: string; scrollTarget?: "about" | "projects" | "contact" }>;
 
       if (custom.detail.section === "about") {
-        // Match the hero's 980 ms scroll-ready delay
         clearTimeout(startTimer.id);
+        if (custom.detail.scrollTarget) {
+          lenis.start();
+          lenis.scrollTo(custom.detail.scrollTarget === "about" ? 0 : `#${custom.detail.scrollTarget}`, {
+            duration: 1.2,
+            force: true,
+            immediate: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              || document.documentElement.dataset.motionPaused === "true",
+          });
+          return;
+        }
+        // Match the hero's 980 ms scroll-ready delay on its initial expansion.
+        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
         startTimer.id = setTimeout(() => lenis.start(), 1000);
       } else {
         clearTimeout(startTimer.id);
@@ -63,6 +74,17 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     };
 
     window.addEventListener("heroSectionChange", handleHeroSection);
+
+    const handleCertificatePreview = (event: Event) => {
+      const { open } = (event as CustomEvent<{ open: boolean }>).detail;
+      clearTimeout(startTimer.id);
+      if (open) lenis.stop();
+      else {
+        lenis.start();
+        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+      }
+    };
+    window.addEventListener("certificatePreviewChange", handleCertificatePreview);
 
     // RAF loop
     let rafId: number;
@@ -74,6 +96,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
     return () => {
       window.removeEventListener("heroSectionChange", handleHeroSection);
+      window.removeEventListener("certificatePreviewChange", handleCertificatePreview);
       clearTimeout(startTimer.id);
       cancelAnimationFrame(rafId);
       lenis.destroy();

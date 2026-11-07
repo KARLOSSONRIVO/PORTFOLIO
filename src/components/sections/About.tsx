@@ -18,7 +18,7 @@ export function About() {
           </h2>
           <div className="space-y-4 sm:space-y-6 font-body text-base sm:text-lg text-on-surface-variant leading-relaxed">
             <p>
-              I am a passionate software developer focused on designing and engineering high-quality, impactful systems. My primary domains of interest include full-stack web development, backend engineering, secure architecture, and implementing AI-driven features to solve real-world problems.
+              I am a passionate software developer focused on designing and engineering high-quality, impactful systems and application. My primary domains of interest include full-stack web development, backend engineering, secure architecture, and implementing AI-driven features to solve real-world problems.
             </p>
             <p>
               My focus lies in building robust foundations: backend orchestration, database optimization, and high-performance APIs. I believe in software that is clean, secure, and highly scalable.

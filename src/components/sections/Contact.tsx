@@ -15,7 +15,7 @@ const fadeUp = {
 };
 
 const inputBase =
-  "w-full bg-[#0e0e0e] text-white placeholder:text-white/25 font-body text-base rounded-xl px-5 py-4 outline-none border transition-all duration-300 resize-none";
+  "w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant font-body text-base rounded-xl px-5 py-4 outline-none border transition-all duration-300 resize-none";
 
 export function Contact() {
   const { ref, isInView } = useScrollReveal({ margin: "-60px" });
@@ -182,7 +182,7 @@ export function Contact() {
               disabled={status === "loading"}
               whileHover={status !== "loading" ? { scale: 1.05 } : {}}
               whileTap={status !== "loading" ? { scale: 0.97 } : {}}
-              className="group inline-flex items-center gap-3 px-10 py-4 bg-primary text-black font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(220,20,60,0.3)] hover:shadow-[0_0_40px_rgba(220,20,60,0.55)] disabled:opacity-70 disabled:cursor-not-allowed"
+              className="group inline-flex items-center gap-3 px-10 py-4 bg-primary text-on-primary-container font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(220,20,60,0.3)] hover:shadow-[0_0_40px_rgba(220,20,60,0.55)] disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {status === "loading" ? (
                 <>
@@ -223,12 +223,12 @@ function Field({
       <div className="flex items-center justify-between">
         <label
           htmlFor={id}
-          className="font-label text-xs uppercase tracking-widest text-on-surface-variant/70"
+          className="font-label text-xs uppercase tracking-widest text-on-surface-variant"
         >
           {label}
         </label>
         {hint && (
-          <span className="font-label text-xs text-on-surface-variant/40">{hint}</span>
+          <span className="font-label text-xs text-on-surface-variant">{hint}</span>
         )}
       </div>
 
