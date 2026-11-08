@@ -113,10 +113,10 @@ The palette combines a primary crimson accent with several dark neutral layers. 
 
 | Token | Visual role |
 | --- | --- |
-| `background` | Root page background. |
-| `surface` | Contact section and navigation gradient origin. |
+| `background` | Root page background: black in dark mode and pale neutral in light mode. Projects, Skills, and Contact have transparent backdrops over one continuous `.portfolio-sections-background` wrapper. Its diagonal gradient uses only the existing `primary` crimson (`#dc143c`) at 8%/4% opacity in dark mode and 4%/2% in light mode, with a transparent midpoint. The gradient does not restart at section boundaries. |
+| `surface` | Navigation gradient origin and raised UI surfaces. |
 | `surface-container-lowest` | Footer and project tags. |
-| `surface-container-low` | Featured-project and technology-section backgrounds. |
+| `surface-container-low` | Raised card surfaces and reduced-motion glass-panel fallback. |
 | `surface-container-high` | Translucent technology tiles. |
 | `surface-container-highest`, `outline-variant` | Borders and higher neutral layers, commonly used with reduced opacity. |
 | `on-surface` | Headings, primary labels, and control text. |
@@ -175,7 +175,7 @@ The home page flows through Hero/About, Featured Projects, Tech Stack, and Conta
 
 The technology grid starts at two columns. Project images use a 16:9 crop with `object-cover`. The hero uses the dynamic viewport height (`100dvh`) and an expanding card whose dimensions follow interaction progress.
 
-Mobile navigation floats above the bottom safe area. The footer applies `.mobile-nav-clearance`, reserving `calc(6rem + env(safe-area-inset-bottom))` below `md` so trailing content is not covered.
+Mobile navigation floats above the bottom safe area. The footer uses `--mobile-nav-clearance` plus 16px for its bottom padding below `md` so trailing content is not covered; desktop vertical padding is 24px. Its brand/social row spans the available width inside `.section-px-sm` gutters, with vertically centered 44px links on desktop and a stacked layout on phones. GitHub and LinkedIn reuse the hero's brand icons; Email uses the Lucide Mail icon. All three icons are 16px, decorative, and followed by visible text labels.
 
 ## Elevation & Depth
 
@@ -195,19 +195,25 @@ The home portrait is an unframed transparent cutout in a charcoal shirt. The mai
 
 ### Navigation
 
+Desktop and mobile navigation include Home, About, Projects, Skills, and Contact. Skills targets the Tech Stack section at `/#skills`, supports direct hashes and hero expansion, and becomes active as that section crosses the viewport's 40% scroll marker. Tablet link spacing is tightened so the five tabs and preference controls fit beside the brand.
+
+The shared footer has a compact brand/social row: the crimson Karlos Rivo logo at left and GitHub, LinkedIn, and Email links at right, stacking on phones. At `xl` (1280px) and above, the brand, centered 14px copyright/authorship credit, and social links share one vertically aligned row with equal-width outer columns. Below `xl`, the credit sits beneath the brand/social row with a 20px gap: “© [build year] Karlos Son Rivo. All rights reserved. Designed and built by Karlos Son Rivo.” The two phrases wrap naturally on smaller screens and use the theme's secondary text color.
+
 The fixed top-left home link displays “KARLOS SON RIVO” in bold crimson uppercase text beside the Lucide Component symbol, matching the supplied logo reference. The identity line is removed from the hero copy. The centered desktop navigation moves to the right on tablets to leave room for the wordmark; on phones the compact wordmark sits opposite the theme and motion controls. The brand link collapses the hero on the home route and returns to `/` from project routes.
 
 `src/components/layout/Navbar.tsx` defines the fixed top brand/header and responsive navigation. Desktop links use small uppercase labels; the active section is crimson with an animated 1px underline. Below `md`, navigation becomes a floating bottom bar with icons and labels; the active item gains a faint crimson fill.
 
-Home and About links on the home route control hero collapse/expansion. Projects and Contact navigate to page sections. Preserve these interaction semantics when reusing the visual navigation pattern.
+Home and About links on the home route control hero collapse/expansion. Projects, Skills, and Contact navigate to page sections. Preserve these interaction semantics when reusing the visual navigation pattern.
 
-When About is requested while the hero is already expanded, it returns the page to the hero, updates the hash to `#about`, and emits the About section signal. Lenis animates the return to the top over 1.2 seconds, replacing its previous scroll target; reduced-motion or paused-motion preferences return immediately. Initial hero expansion retains its existing scroll-ready delay. Desktop and mobile navigation share this behavior. Once the hero is expanded, Projects and Contact also use the same Lenis scroll coordination, so a new navigation click replaces any running scroll animation.
+When About is requested while the hero is already expanded, it returns the page to the hero, updates the hash to `#about`, and emits the About section signal. Fine-pointer devices use Lenis to animate the return to the top over 1.2 seconds, replacing its previous scroll target; touch-first devices use native smooth scrolling; reduced-motion or paused-motion preferences return immediately. Initial hero expansion retains its existing scroll-ready delay. Desktop and mobile navigation share this behavior. Once the hero is expanded, Projects, Skills, and Contact use the same device-appropriate scroll coordination, so a new navigation click replaces any running scroll animation.
 
 ### Hero and About presentation
 
+Certificates & seminars keeps its natural 40px gap after the About introduction (28px on phones), with no viewport-height spacer. Its heading and cards are initially transparent and fade in together once the page has scrolled more than 24px and the section enters the viewport with an 80px bottom inset. Returning to the page top hides it again. Keyboard focus reveals the section immediately; paused and reduced-motion preferences remove the fade. The root page scrollbar is hidden in Firefox and Chromium/WebKit without disabling wheel, touch, or keyboard scrolling; nested certificate previews keep their scrollbar.
+
 The expanded About panel renders `AboutProfile.tsx`, matching the approved open-text preview. The left column places “What shapes my work.” and two descriptive paragraphs directly on the crimson grid. A single Education & experience card follows, with a résumé download beneath it. The unframed crossed-arm portrait on the right sits over subdued SYSTEMS. lettering, with small Web & mobile and Backend & AI callouts. The full-width learning area contains the Zuitt AWS Fundamentals course, eGovPH Hackathon, and Meta's Introduction to Android Mobile Application Development course. The three certificate cards share one horizontal desktop row and stack into one column below 1024px. The Zuitt course is not presented as an AWS-issued professional certification. The portrait at `/images/karlos-rivo-about-crossed-arms.png` is the approved original-pose clothing edit, with the charcoal crewneck used on Home.
 
-The profile uses Geist, up to 50px desktop/36px phone title type, 16px descriptions, charcoal surfaces, 14px corners, and crimson-tinted metadata. It uses the existing theme tokens plus scoped light-theme surface overrides. Below 1024px the profile and learning records stack. The About region is keyboard focusable and grows with its content; it has no fixed viewport cap or inner scrollbar. The parent section expands to the measured content height, and wheel, touch, and keyboard scrolling move the page. The existing hero expansion and Lenis navigation event contracts remain in place. Cards enter once on visibility with a 16px rise over 500ms and an 80ms stagger. Fine pointers lift and rotate only the visual surface by -4px/-0.6deg over 220ms; outer wrappers stay stationary. Reduced-motion and paused-motion preferences render all cards without animation. The three supplied certificate cards have stationary native button overlays and a View certificate cue. Code & Conquer is omitted for now at the user's request.
+The profile uses Geist, up to 50px desktop/36px phone title type, 16px descriptions, charcoal surfaces, 14px corners, and crimson-tinted metadata. It uses the existing theme tokens plus scoped light-theme surface overrides. Below 1024px the profile and learning records stack. The About region is keyboard focusable and grows with its content; it has no fixed viewport cap or inner scrollbar. The parent section expands to the measured content height, and wheel, touch, and keyboard scrolling move the page. The content retains its final responsive width throughout expansion, while the shell clips it; a static crimson shadow replaces per-frame shadow interpolation. Gesture listeners become passive once expanded, and touch positions do not trigger React renders. The existing hero expansion and Lenis navigation event contracts remain in place. Cards enter once on visibility with a 16px rise over 500ms and an 80ms stagger. Fine pointers lift and rotate only the visual surface by -4px/-0.6deg over 220ms; outer wrappers stay stationary. Reduced-motion and paused-motion preferences render all cards without animation. The three supplied certificate cards have stationary native button overlays and a View certificate cue. Code & Conquer is omitted for now at the user's request.
 
 ### Certificate preview
 
@@ -227,7 +233,21 @@ The introduction leads with the two-line headline “Built to work. Made to matt
 
 ### Technology tile
 
-`TechStack.tsx` presents a centered icon and compact uppercase label inside a rounded dark tile. Hover changes the icon to crimson, tints the tile, and adds a red glow. These tiles are informational, not buttons.
+Technology marks use individual colors: TypeScript blue, React/Flutter cyan, Node.js/MongoDB green, Python/Express yellow, FastAPI teal, Kotlin/Blockchain purple, and Java orange; Next.js retains its monochrome mark. Main logos are 56px on desktop and 36px on phones, with 30px/20px full-opacity side logos. TypeScript's SVG uses a white backing for its letter cutouts. Light mode selects darker per-technology colors for contrast, while names retain the theme's text color.
+
+Filled brand SVGs keep a zero-width stroke so their negative spaces and fine details remain visible. Only the outlined Blockchain link mark uses a 1.8px stroke.
+
+`TechStack.tsx` implements the approved Stitch concept as live CSS 3D cubes with six connected faces each, accurate SVG marks, and real text. Its 25 unique records include the original technologies plus Redis, Docker, Git, MySQL, PostgreSQL, Ollama, Solidity, HTML, CSS, Laravel, PHP, Django, and JavaScript. FastAPI appears once; HTML and CSS have separate cubes.
+
+A category filter group sits below the heading: All (25), Databases (4), Tools (4), AI (1), Languages (9), and Frameworks (7). Native buttons have category icons, visible counts, pressed states, focus outlines, and 44px minimum heights. The active filter uses a crimson border and tint. A polite status line announces the current count. Controls wrap on tablets and form a two-column, three-row grid on phones. All restores every technology; changing categories closes any current stand and resets pointer tilt without changing the section hash or moving keyboard focus.
+
+All uses a five-by-five desktop assembly of 112px/70px cubes with 56px gaps, 50px logos, and 12px names. Filtered groups use up to four columns of 128px/80px cubes with 68px gaps, 56px logos, and 14px names. The scene height adapts to the number of rows; the one-item AI view is centered. Both use a 54.7356-degree X / -45-degree Z camera and 2000px perspective. Charcoal top faces, shaded walls, and a 2px rose rim create solid depth. Elevations are computed from each filtered position so the rear stays higher and labels remain visible. Fine-pointer hover raises a block by 16px; cursor position tilts the scene by at most 1.5 degrees, settling over 500ms. At 1024–1199px the assembly and scene height scale to .84; at 768–1023px they scale to .64. Phones use individually tilted 86px/48px cubes (76px/44px below 480px) in three columns, or two below 360px, with 11px labels. Light mode selects pale rose faces and darker per-technology icon colors.
+
+The blocks float 12px along their local depth axis over staggered 5.5–7.3-second cycles. Motion pauses outside the viewport, in background tabs, and with the existing navbar pause control. Reduced motion keeps the static 3D composition and disables pointer tilt and hover lift; touch layouts have no pointer tilt. The technologies remain a semantic list, with decorative side logos hidden from assistive technology. Each cube is now a native display-stand button with an action label, expanded state, controlled-element binding, and visible keyboard focus. The effect uses CSS transforms and the existing Framer Motion viewport observer, without a canvas or added dependencies. Pointer parallax writes two local CSS properties without React state changes or another animation loop. Skills navigation retains `/#skills`.
+
+Hover or keyboard focus raises a transparent, brand-colored acrylic logo stand from a slot in the cube, matching the approved lamp-inspired preview. Its 174px desktop plane rotates upright in the existing 3D scene; the etched logo outline, glowing mark, and transparent support stem are decorative. It rises in 480ms and fades in over 200ms; pointer leave retracts an unpinned stand. Selecting a cube pins its stand; a second selection, outside press, or Escape dismisses it. Only one technology is previewed at a time; hover/focus temporarily takes priority over a pinned cube. The base's flat logo hides during the reveal while its name stays visible, and bobbing pauses on the active cube. Phones use 132px stands and tap-to-toggle. Additional scene spacing protects the heading and first row. Paused/reduced-motion modes show the requested state immediately, retaining usable controls without the rising animation. Light mode darkens the stand's brand color for contrast. The subtitle reads “Hover or tap a cube to raise its display.”
+
+The All scene uses an 8px top margin from 1200px upward and 56px at 1024–1199px, removing excess space created by the centered projection. Its base-cube lift is 8px on desktop to preserve stand clearance with the tighter spacing. Filtered scenes use an 84px desktop top margin and 16px lift. At 1024–1199px multi-item filtered scenes use 108px; at 768–1023px they use 148px while All and AI use 108px. Phone scenes use 64px internal top padding, with a 52px margin and no base lift in All, or a 48px margin for other categories. This keeps the upper stand clear of the result summary in normal-motion layouts.
 
 ### Primary action
 
@@ -261,9 +281,9 @@ Portfolio project thumbnails are imported from `src/app/images/Projects/`. The A
 | Hover response | Commonly 0.3 seconds; project-image zoom uses 0.7 seconds. |
 | Active navigation | Spring with stiffness 300 and damping 30. |
 | Ambient hero motion | PORTFOLIO ticker loops over 52 seconds; gaze images crossfade over 150ms. |
-| Smooth scroll | Lenis uses a configured duration of 1.2 seconds, coordinated with hero state. |
+| Smooth scroll | Fine-pointer devices use demand-driven Lenis at 1.2 seconds; touch-first devices use native smooth scrolling and momentum. |
 
-`useScrollReveal` sets `once: false`, so section reveals can replay when content leaves and re-enters the viewport. The portrait introduction explicitly disables its ticker and cursor motion for reduced-motion preferences and coarse touch pointers; other section reveals retain their existing behavior.
+`useScrollReveal` defaults to `once: true`, so revisiting a section does not replay every card entrance. Paused or reduced-motion preferences keep the reveal state visible, and the shared MotionConfig removes spatial Framer Motion animation while preserving fades and navigation feedback. The portrait introduction explicitly disables its ticker for reduced-motion preferences and coarse touch pointers. Touch and reduced-motion layouts use opaque project/mobile-navigation surfaces instead of backdrop blur, plus a radial contact tint instead of a 120px blur. The same less expensive surfaces apply while motion is paused.
 
 ## Do's and Don'ts
 
@@ -311,12 +331,12 @@ Two personal cards remain on the right: My approach (quote) and A little about m
 
 Below 1100px, or on viewports shorter than 700px, the portrait, copy and cards use normal document flow inside a scrollable intro. Phone cards stack in one column with 20px margins and footer clearance for the centered mobile bottom navigation. The intro has data-lenis-prevent so native inner scrolling works while global Lenis is stopped. Wheel/touch events scroll the intro until its boundary, then drive the existing About expansion. Home navigation resets the intro scroll position.
 
-The ticker loops in 52 seconds and is controlled by the navbar pause/play button. Reduced-motion and touch layouts show the static centered portrait and stop the ticker. Intro controls become inert on expansion; About content is inert until revealed. The heroNavRequest and heroSectionChange events still coordinate navigation, scroll locking, and Lenis. Projects and Contact requests from the collapsed hero expand it before navigating; direct section hashes initialize the expanded state. The global inline font tokens now reference the Geist font actually loaded by the layout.
+The ticker loops in 52 seconds and is controlled by the navbar pause/play button. Reduced-motion and touch layouts show the static centered portrait and stop the ticker. Intro controls become inert on expansion; About content is inert until revealed. The heroNavRequest and heroSectionChange events still coordinate navigation, scroll locking, and Lenis. Projects, Skills, and Contact requests from the collapsed hero expand it before navigating; direct section hashes initialize the expanded state. The global inline font tokens now reference the Geist font actually loaded by the layout.
 
 
 ### Theme and motion preferences
 
-The desktop navigation replaces its contact CTA with two 44px icon buttons: Pause/Play controls hero motion, and Sun/Moon switches dark/light appearance. Buttons have action labels, native titles, visible focus rings, and pressed-state semantics. Phones show the same two controls in a compact fixed top-right toolbar, preserving the four-item bottom navigation. The old hero-footer pause button is removed.
+The desktop navigation replaces its contact CTA with two 44px icon buttons: Pause/Play controls hero motion, and Sun/Moon switches dark/light appearance. Buttons have action labels, native titles, visible focus rings, and pressed-state semantics. Phones show the same two controls in a compact fixed top-right toolbar, preserving the five-item bottom navigation. The old hero-footer pause button is removed.
 
 useSitePreferences shares primitive snapshots through useSyncExternalStore and a portfolio-preferences event. The root beforeInteractive bootstrap restores portfolio-theme and portfolio-motion-paused from localStorage; storage failures retain working in-memory controls. Storage events synchronize other tabs. Dark is the default. Preferences survive reloads and project-route navigation. Pausing freezes the ticker, card float/tilt and portrait gaze; section navigation and form feedback remain usable.
 

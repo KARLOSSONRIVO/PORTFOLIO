@@ -21,7 +21,7 @@ function HeroGeometric({
     const [showContent, setShowContent] = useState(false);
     // scrollReady gates body-overflow unlock until content has fully faded in
     const [scrollReady, setScrollReady] = useState(false);
-    const [touchStartY, setTouchStartY] = useState(0);
+    const touchStartY = useRef(0);
     const [isMobile, setIsMobile] = useState(false);
     const [viewportHeight, setViewportHeight] = useState(0);
     const [aboutHeight, setAboutHeight] = useState(0);
@@ -33,7 +33,7 @@ function HeroGeometric({
     const scrollReadyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     // RAF handle for navbar-triggered animations
     const navRafRef = useRef<number>(0);
-    const pendingSectionRef = useRef<"projects" | "contact" | undefined>(undefined);
+    const pendingSectionRef = useRef<"projects" | "skills" | "contact" | undefined>(undefined);
 
     useEffect(() => () => {
         if (contentTimerRef.current) clearTimeout(contentTimerRef.current);
@@ -87,7 +87,7 @@ function HeroGeometric({
         };
     }, [scrollReady]);
 
-    // Single persistent event handler — handles both expansion AND collapse
+    // Only Home needs blocking gestures; expanded page scrolling stays passive.
     useEffect(() => {
         const canScrollPanel = (target: EventTarget | null, delta: number) => {
             const intro = target instanceof Element ? target.closest<HTMLElement>(".portrait-intro") : null;
@@ -96,13 +96,14 @@ function HeroGeometric({
         };
         const handleWheel = (e: WheelEvent) => {
             if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
-            const exp = expandedRef.current;
+            const exp = expanded;
 
             if (exp) {
                 if (canScrollPanel(e.target, e.deltaY)) return;
                 // Fully expanded: only intercept scroll-up at the very top of page
                 if (window.scrollY <= 2 && e.deltaY < 0) {
-                    e.preventDefault();
+                    // Once expanded this listener is passive: scrolling stays
+                    // on the browser's fast path, including at the top edge.
                     // Start collapsing
                     setExpanded(false);
                     setShowContent(false);
@@ -121,6 +122,7 @@ function HeroGeometric({
             e.preventDefault();
             const delta = e.deltaY * 0.0012;
             const next = Math.min(Math.max(progressRef.current + delta, 0), 1);
+            progressRef.current = next;
             setScrollProgress(next);
 
             if (next >= 1) {
@@ -138,22 +140,21 @@ function HeroGeometric({
 
         const handleTouchStart = (e: TouchEvent) => {
             if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
-            setTouchStartY(e.touches[0].clientY);
+            touchStartY.current = e.touches[0].clientY;
         };
 
         const handleTouchMove = (e: TouchEvent) => {
             if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
-            const exp = expandedRef.current;
+            const exp = expanded;
             const touchY = e.touches[0].clientY;
-            const deltaY = touchStartY - touchY;
+            const deltaY = touchStartY.current - touchY;
             if (canScrollPanel(e.target, deltaY)) {
-                setTouchStartY(touchY);
+                touchStartY.current = touchY;
                 return;
             }
 
             if (exp) {
                 if (window.scrollY <= 2 && deltaY < -20) {
-                    e.preventDefault();
                     setExpanded(false);
                     setShowContent(false);
                     setScrollReady(false);
@@ -167,6 +168,7 @@ function HeroGeometric({
             e.preventDefault();
             const factor = deltaY < 0 ? 0.008 : 0.005;
             const next = Math.min(Math.max(progressRef.current + deltaY * factor, 0), 1);
+            progressRef.current = next;
             setScrollProgress(next);
 
             if (next >= 1) {
@@ -180,14 +182,14 @@ function HeroGeometric({
             } else {
                 setShowContent(false);
             }
-            setTouchStartY(touchY);
+            touchStartY.current = touchY;
         };
 
-        const handleTouchEnd = () => setTouchStartY(0);
+        const handleTouchEnd = () => { touchStartY.current = 0; };
 
-        window.addEventListener("wheel", handleWheel, { passive: false });
-        window.addEventListener("touchstart", handleTouchStart, { passive: false });
-        window.addEventListener("touchmove", handleTouchMove, { passive: false });
+        window.addEventListener("wheel", handleWheel, { passive: expanded });
+        window.addEventListener("touchstart", handleTouchStart, { passive: true });
+        window.addEventListener("touchmove", handleTouchMove, { passive: expanded });
         window.addEventListener("touchend", handleTouchEnd);
 
         return () => {
@@ -196,14 +198,14 @@ function HeroGeometric({
             window.removeEventListener("touchmove", handleTouchMove);
             window.removeEventListener("touchend", handleTouchEnd);
         };
-    }, [touchStartY]); // No `expanded` dep — listeners stay attached always
+    }, [expanded]); // Change scroll policy only when crossing the Home/About boundary.
 
     // ── Navbar-initiated expand / collapse via heroNavRequest ──────────────────
     useEffect(() => {
         const easeInOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
         const handleNavRequest = (e: Event) => {
-            const custom = e as CustomEvent<{ action: "expand" | "collapse"; target?: "projects" | "contact" }>;
+            const custom = e as CustomEvent<{ action: "expand" | "collapse"; target?: "projects" | "skills" | "contact" }>;
             cancelAnimationFrame(navRafRef.current);
 
             if (custom.detail.action === "expand") {
@@ -283,7 +285,7 @@ function HeroGeometric({
         window.addEventListener("heroNavRequest", handleNavRequest);
         const initialTarget = window.location.hash.slice(1);
         const initialRaf = requestAnimationFrame(() => {
-            if (["about", "projects", "contact"].includes(initialTarget)) {
+            if (["about", "projects", "skills", "contact"].includes(initialTarget)) {
                 window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: {
                     action: "expand", target: initialTarget === "about" ? undefined : initialTarget,
                 } }));
@@ -300,6 +302,7 @@ function HeroGeometric({
     const wGrowth = isMobile ? 650 : 1250;
     const hBase = isMobile ? 280 : 320;
     const cardW = `min(${wBase + scrollProgress * wGrowth}px, ${isMobile ? "95vw" : "98vw"})`;
+    const contentWidth = `min(${wBase + wGrowth}px, ${isMobile ? "95vw" : "98vw"})`;
     const expandedHeight = Math.max(aboutHeight, viewportHeight - 32, hBase);
     const cardHeight = hBase + scrollProgress * (expandedHeight - hBase);
     const sectionHeight = Math.max(viewportHeight, cardHeight + 32);
@@ -322,7 +325,7 @@ function HeroGeometric({
                         borderRadius: borderRad,
                         overflow: "hidden",
                         position: "relative",
-                        boxShadow: `0 0 ${60 + scrollProgress * 80}px rgba(220,20,60,${0.08 + scrollProgress * 0.18})`,
+                        boxShadow: "0 24px 80px -24px rgba(220,20,60,0.18)",
                         zIndex: 10,
                     }}
                 >
@@ -342,7 +345,10 @@ function HeroGeometric({
                         tabIndex={showContent ? 0 : -1}
                         role="region"
                         aria-labelledby="about-profile-title"
-                        className="about-region relative z-10 w-full"
+                        className="about-region relative z-10"
+                        // Clip a stable-width document instead of rewrapping
+                        // every paragraph and remeasuring its height each frame.
+                        style={{ width: contentWidth, left: "50%", x: "-50%" }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: showContent ? 1 : 0 }}
                         transition={{ duration: 0.7 }}

@@ -43,7 +43,7 @@ export function FeaturedProjects() {
   const { ref: gridRef, isInView: gridInView } = useScrollReveal({ margin: "-60px" });
 
   return (
-    <section id="projects" className="py-20 sm:py-24 md:py-32 section-px bg-surface-container-low">
+    <section id="projects" className="py-20 sm:py-24 md:py-32 section-px">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading row */}

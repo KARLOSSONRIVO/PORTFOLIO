@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LayoutGrid, Layers, User, Mail, Component } from "lucide-react";
+import { LayoutGrid, Layers, User, Mail, Component, CodeXml } from "lucide-react";
 import { PreferenceControls } from "@/components/ui/PreferenceControls";
 import { usePathname } from "next/navigation";
 import { useActiveSection } from "@/hooks/useActiveSection";
@@ -18,7 +18,7 @@ export function Navbar() {
     window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: { action } }));
   };
 
-  const handleSectionNav = (target: "projects" | "contact") => (e: React.MouseEvent) => {
+  const handleSectionNav = (target: "projects" | "skills" | "contact") => (e: React.MouseEvent) => {
     if (pathname !== "/") return;
     e.preventDefault();
     window.dispatchEvent(new CustomEvent("heroNavRequest", { detail: { action: "expand", target } }));
@@ -42,6 +42,9 @@ export function Navbar() {
             <NavLink href="/#projects" active={activeSection === "projects"} onClick={handleSectionNav("projects")}>
               Projects
             </NavLink>
+            <NavLink href="/#skills" active={activeSection === "skills"} onClick={handleSectionNav("skills")}>
+              Skills
+            </NavLink>
             <NavLink href="/#contact" active={activeSection === "contact"} onClick={handleSectionNav("contact")}>
               Contact
             </NavLink>
@@ -53,12 +56,13 @@ export function Navbar() {
 
       {/* Mobile Bottom Navigation */}
       <nav
-        className="md:hidden fixed left-1/2 -translate-x-1/2 flex justify-around items-center p-1.5 xs:p-2 z-50 bg-surface-container/60 backdrop-blur-xl w-[92%] xs:w-[90%] max-w-md rounded-2xl border border-outline-variant/15 shadow-[0_0_40px_rgba(220,20,60,0.08)]"
+        className="mobile-nav md:hidden fixed left-1/2 -translate-x-1/2 flex justify-around items-center p-1.5 xs:p-2 z-50 bg-surface-container/60 backdrop-blur-xl w-[92%] xs:w-[90%] max-w-md rounded-2xl border border-outline-variant/15 shadow-[0_0_40px_rgba(220,20,60,0.08)]"
         style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}
       >
         <MobileNavLink href="/#home" icon={<LayoutGrid className="w-5 h-5" />} label="Home" active={activeSection === "home"} onClick={handleHeroNav("collapse")} />
         <MobileNavLink href="/#about" icon={<User className="w-5 h-5" />} label="About" active={activeSection === "about"} onClick={handleHeroNav("expand")} />
         <MobileNavLink href="/#projects" icon={<Layers className="w-5 h-5" />} label="Projects" active={activeSection === "projects"} onClick={handleSectionNav("projects")} />
+        <MobileNavLink href="/#skills" icon={<CodeXml className="w-5 h-5" />} label="Skills" active={activeSection === "skills"} onClick={handleSectionNav("skills")} />
         <MobileNavLink href="/#contact" icon={<Mail className="w-5 h-5" />} label="Contact" active={activeSection === "contact"} onClick={handleSectionNav("contact")} />
       </nav>
     </>
@@ -115,6 +119,7 @@ function MobileNavLink({
       className={`flex flex-1 flex-col items-center justify-center px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 rounded-xl transition-all ${
         active ? "text-primary bg-primary/10" : "text-on-surface hover:bg-primary/5"
       }`}
+      aria-current={active ? "location" : undefined}
     >
       {icon}
       <span className="font-label text-[9px] xs:text-[10px] uppercase tracking-widest mt-1 whitespace-nowrap">{label}</span>

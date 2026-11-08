@@ -35,11 +35,8 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 sm:py-24 md:py-32 section-px-sm bg-surface text-center relative overflow-hidden"
+      className="py-20 sm:py-24 md:py-32 section-px-sm text-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/8 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
       <motion.div
         ref={ref}
         className="max-w-2xl mx-auto relative z-10 flex flex-col items-center"

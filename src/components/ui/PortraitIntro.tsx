@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Caveat } from "next/font/google";
 import { ArrowUpRight, Download, Mail } from "lucide-react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-import { useEffect, useId, useRef, useState, type PointerEvent } from "react";
+import { memo, useEffect, useId, useRef, useState, type PointerEvent } from "react";
 import { PersonalCard } from "@/components/ui/PersonalCard";
 import { useSitePreferences } from "@/hooks/useSitePreferences";
 
@@ -14,7 +14,7 @@ type Direction = typeof directions[number];
 const source = (direction: Direction) => `/images/karlos-rivo-cutout-v2/${direction}.webp`;
 const handwriting = Caveat({ subsets: ["latin"], weight: "500", display: "swap" });
 
-export function PortraitIntro({ name, role, subtitle, active }: {
+export const PortraitIntro = memo(function PortraitIntro({ name, role, subtitle, active }: {
     name: string; role: string; subtitle: string; active: boolean;
 }) {
     const reducedMotion = useReducedMotion();
@@ -150,4 +150,4 @@ export function PortraitIntro({ name, role, subtitle, active }: {
             </div>
         </div>
     );
-}
+});

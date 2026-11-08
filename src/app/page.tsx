@@ -7,9 +7,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <FeaturedProjects />
-      <TechStack />
-      <Contact />
+      <div className="portfolio-sections-background">
+        <FeaturedProjects />
+        <TechStack />
+        <Contact />
+      </div>
     </>
   );
 }

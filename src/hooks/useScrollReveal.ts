@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { useInView, type UseInViewOptions } from "framer-motion";
+import { useInView, useReducedMotion, type UseInViewOptions } from "framer-motion";
+import { useSitePreferences } from "@/hooks/useSitePreferences";
 
 /**
  * Returns a ref and isInView flag.
@@ -12,12 +13,14 @@ import { useInView, type UseInViewOptions } from "framer-motion";
  */
 export function useScrollReveal(options: Partial<UseInViewOptions> = {}) {
   const ref = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { paused } = useSitePreferences();
   const isInView = useInView(ref, {
-    once: false,
+    once: true,
     margin: "-80px" as UseInViewOptions["margin"],
     ...options,
   });
 
-  return { ref, isInView };
+  return { ref, isInView: Boolean(reducedMotion || paused || isInView) };
 }
 

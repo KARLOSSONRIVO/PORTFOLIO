@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { useInView } from "framer-motion";
+import { useInView, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowUpRight, BriefcaseBusiness, Download, GraduationCap } from "lucide-react";
-import { useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { memo, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import { CertificatePreview, type CertificateOrigin } from "@/components/ui/CertificatePreview";
 import { certificates, type Certificate } from "@/lib/certificates";
 
@@ -45,8 +45,13 @@ function AboutCard({ children, className = "", delay = 0, onOpen, actionLabel, e
     );
 }
 
-export function AboutProfile({ active = false }: { active?: boolean }) {
+export const AboutProfile = memo(function AboutProfile({ active = false }: { active?: boolean }) {
     const [preview, setPreview] = useState<{ certificate: Certificate; origin: CertificateOrigin } | null>(null);
+    const learningRef = useRef<HTMLElement>(null);
+    const learningInView = useInView(learningRef, { once: true, margin: "0px 0px -80px 0px" });
+    const [hasScrolled, setHasScrolled] = useState(false);
+    const { scrollY } = useScroll();
+    useMotionValueEvent(scrollY, "change", value => setHasScrolled(value > 24));
 
     function openCertificate(certificate: Certificate, event: MouseEvent<HTMLButtonElement>) {
         const bounds = event.currentTarget.getBoundingClientRect();
@@ -99,7 +104,7 @@ export function AboutProfile({ active = false }: { active?: boolean }) {
                     </div>
                 </div>
             </div>
-            <section className="about-profile-learning" aria-labelledby="about-learning">
+            <section ref={learningRef} className="about-profile-learning" data-visible={hasScrolled && learningInView} aria-labelledby="about-learning">
                 <h3 id="about-learning">Certificates &amp; seminars</h3>
                 <div className="about-profile-learning-grid">
                     {learningRecords.map((record, index) => (
@@ -128,4 +133,4 @@ export function AboutProfile({ active = false }: { active?: boolean }) {
             {preview && <CertificatePreview key={preview.certificate.id} certificate={preview.certificate} origin={preview.origin} onClose={() => setPreview(null)} />}
         </div>
     );
-}
+});

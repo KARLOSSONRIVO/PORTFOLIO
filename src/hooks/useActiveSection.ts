@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 /**
  * Tracks which navigation section is currently "active" based on:
  * 1. Hero card state — fired via the `heroSectionChange` custom event ("home" | "about")
- * 2. Scroll position — detects when #projects or #contact enter the viewport
+ * 2. Scroll position — detects when #projects, #skills or #contact enter the viewport
  *
  * @returns The currently active section identifier string
  *
@@ -19,7 +19,7 @@ export function useActiveSection(): string {
 
   // Driven by hero animation signals ("home" | "about")
   const [heroSection, setHeroSection] = useState("home");
-  // Driven by native scroll position ("projects" | "contact" | "")
+  // Driven by native scroll position ("projects" | "skills" | "contact" | "")
   const [scrollSection, setScrollSection] = useState("");
 
   useEffect(() => {
@@ -45,11 +45,14 @@ export function useActiveSection(): string {
       }
 
       const projects = document.getElementById("projects");
+      const skills = document.getElementById("skills");
       const contact = document.getElementById("contact");
       const mid = scrollY + window.innerHeight * 0.4;
 
       if (contact && mid >= contact.offsetTop) {
         setScrollSection("contact");
+      } else if (skills && mid >= skills.offsetTop) {
+        setScrollSection("skills");
       } else if (projects && mid >= projects.offsetTop) {
         setScrollSection("projects");
       } else {
