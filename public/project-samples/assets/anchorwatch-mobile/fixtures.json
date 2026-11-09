@@ -1,0 +1,81 @@
+{
+  "monthly": [
+    {
+      "period": "Jun",
+      "price": 1.0002,
+      "supply": 60900,
+      "net": 620,
+      "inflation": 2.9
+    },
+    {
+      "period": "Jul",
+      "price": 0.9998,
+      "supply": 61700,
+      "net": 800,
+      "inflation": 2.8
+    },
+    {
+      "period": "Aug",
+      "price": 1.0001,
+      "supply": 61300,
+      "net": -400,
+      "inflation": 2.7
+    },
+    {
+      "period": "Sep",
+      "price": 1,
+      "supply": 62500,
+      "net": 1200,
+      "inflation": 2.6
+    },
+    {
+      "period": "Oct",
+      "price": 0.9999,
+      "supply": 63100,
+      "net": 600,
+      "inflation": 2.5
+    },
+    {
+      "period": "Nov",
+      "price": 1.0001,
+      "supply": 63900,
+      "net": 800,
+      "inflation": 2.4
+    }
+  ],
+  "yearly": [
+    {
+      "period": "2024",
+      "price": 1.0001,
+      "supply": 43800,
+      "net": 7200,
+      "inflation": 3.4
+    },
+    {
+      "period": "2025",
+      "price": 0.9999,
+      "supply": 58200,
+      "net": 14400,
+      "inflation": 3
+    },
+    {
+      "period": "2026",
+      "price": 1.0001,
+      "supply": 63900,
+      "net": 5700,
+      "inflation": 2.4
+    }
+  ],
+  "articles": [
+    {
+      "title": "Understanding stablecoin supply and market activity",
+      "copy": "This fictional article explains how supply and market capitalization appear in the sample charts. Values and events are invented for this portfolio preview.",
+      "tag": "Stablecoins"
+    },
+    {
+      "title": "Reading macro indicators alongside digital assets",
+      "copy": "Compare the illustrative inflation series with stablecoin supply. This sample article demonstrates the original mobile card layout with local content.",
+      "tag": "Economy"
+    }
+  ]
+}

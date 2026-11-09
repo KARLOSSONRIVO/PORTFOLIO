@@ -1,0 +1,77 @@
+{
+  "bookingCounts": [
+    18,
+    24,
+    21,
+    29,
+    34,
+    31,
+    27
+  ],
+  "providers": [
+    [
+      "AR",
+      "Adrian Ramos",
+      "Plumbing",
+      "4.9",
+      "₱350 / visit"
+    ],
+    [
+      "BM",
+      "Bea Mendoza",
+      "Electrical",
+      "4.8",
+      "₱400 / visit"
+    ],
+    [
+      "MS",
+      "Marco Santos",
+      "Air-con repair",
+      "4.9",
+      "₱500 / visit"
+    ]
+  ],
+  "expenses": [
+    {
+      "date": "Nov 9",
+      "title": "Lunch",
+      "category": "Food",
+      "amount": 120
+    },
+    {
+      "date": "Nov 9",
+      "title": "Jeepney fare",
+      "category": "Transport",
+      "amount": 30
+    },
+    {
+      "date": "Nov 9",
+      "title": "Study supplies",
+      "category": "Shopping",
+      "amount": 89.5
+    },
+    {
+      "date": "Nov 8",
+      "title": "Groceries",
+      "category": "Food",
+      "amount": 640
+    },
+    {
+      "date": "Nov 7",
+      "title": "Internet",
+      "category": "Utilities",
+      "amount": 999
+    }
+  ],
+  "today": 239.5,
+  "monthly": 1878.5,
+  "screens": [
+    "daguconnect-desktop",
+    "daguconnect-mobile",
+    "anchorwatch-desktop",
+    "send-notes-mobile",
+    "ucash-desktop",
+    "paldex-desktop",
+    "anchorwatch-mobile"
+  ]
+}

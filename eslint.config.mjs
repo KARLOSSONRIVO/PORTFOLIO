@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone reference projects are not part of the portfolio application.
+    "PROJECTS/**",
   ]),
 ]);
 

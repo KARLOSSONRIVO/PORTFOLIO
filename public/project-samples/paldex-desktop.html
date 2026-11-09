@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; media-src 'self'; connect-src 'none'; object-src 'none'; form-action 'none'">
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="x-icon" href="assets/paldex/images/logo/PaldexLogo.png">
+  <title>PALDEX</title>
+  <link rel="stylesheet" href="assets/paldex/Home.css"><link rel="stylesheet" href="paldex-preview.css">
+
+</head>
+<body>
+<video loop muted playsinline preload="metadata" class="bg_video" poster="assets/paldex/home-desktop.jpg" aria-label="Original PALDEX background scene"><source src="assets/paldex/home-mobile.mp4" media="(max-width:980px)" type="video/mp4"><source src="assets/paldex/home-desktop.mp4" type="video/mp4"></video><section><h1 class="paldex-accessible-title">PALDEX</h1>
+ <div class="map">
+  <a href="#" aria-label="Open world map" data-preview-destination="Open world map" tabindex="-1"><img src="assets/paldex/images/icon/Map.png" width="80" height="80" alt=""></a>
+ </div>
+  <nav>
+    <div class="menu" id="paldex-elements">
+      <button type="button" class="toggle" aria-label="Open element menu" aria-expanded="false" aria-controls="paldex-elements">
+        <img src="assets/paldex/images/icon/A_close_book.png" height="100" width="100" alt=""><span><img src="assets/paldex/images/icon/A_open_ book.png"height="100" width="100" alt=""></span>
+        </button>
+
+        <li style="--i:0;--clr:#9A7D7D">
+          <a href="#" aria-label="neutral" data-preview-destination="neutral" tabindex="-1"><img src="assets/paldex/images/icon/NeutralIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/NeutralBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:1;--clr:#4C9900">
+          <a href="#" aria-label="grass" data-preview-destination="grass" tabindex="-1"><img src="assets/paldex/images/icon/GrassIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/GrassBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:2;--clr:#0066CC">
+          <a href="#" aria-label="water" data-preview-destination="water" tabindex="-1"><img src="assets/paldex/images/icon/WaterIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/WaterBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:3;--clr:#CC6600">
+          <a href="#" aria-label="fire" data-preview-destination="fire" tabindex="-1"><img src="assets/paldex/images/icon/FireIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/FireBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:4;--clr:#81570E">
+          <a href="#" aria-label="ground" data-preview-destination="ground" tabindex="-1"><img src="assets/paldex/images/icon/GroundIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/GroundBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:5;--clr:#009999">
+          <a href="#" aria-label="ice" data-preview-destination="ice" tabindex="-1"><img src="assets/paldex/images/icon/IceIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/IceBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:6;--clr:#B79627">
+          <a href="#" aria-label="electric" data-preview-destination="electric" tabindex="-1"><img src="assets/paldex/images/icon/ElectricIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/ElectricBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:7;--clr:#CC0066">
+          <a href="#" aria-label="dark" data-preview-destination="dark" tabindex="-1"><img src="assets/paldex/images/icon/DarkIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/DarkBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:8;--clr:#B358C1">
+          <a href="#" aria-label="dragon" data-preview-destination="dragon" tabindex="-1"><img src="assets/paldex/images/icon/DragonIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/DragonBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+        <li style="--i:9;--clr:#E0E0E0">
+          <a href="#" aria-label="Home" data-preview-destination="Home" tabindex="-1"><img src="assets/paldex/images/icon/HomeIcon.png" width="80" height="80" alt=""><span><img src="assets/paldex/images/TEXT/HomeBar.png" height="70" width="70" alt=""></span></a>
+        </li>
+  
+    </div>
+
+  </nav>
+    <div class="LOGO" aria-label="PALDEX">
+      <img src="assets/paldex/images/logo/PaldexLogo2.png" width="160" height="160" alt="">
+    </div>
+</section><div class="paldex-tools"><span>Original PALDEX home</span><button type="button" id="paldex-motion" aria-pressed="false">Play background</button></div><p class="paldex-notice" role="status" hidden></p>
+
+
+
+<script  src="paldex-preview.js"></script>
+
+</body>
+</html>

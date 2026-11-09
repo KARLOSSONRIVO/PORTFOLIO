@@ -33,6 +33,7 @@ The home page composes the following components from `src/components/sections/`:
 
 - `Hero` — the animated landing experience, using the hero UI component.
 - `FeaturedProjects` — project cards and their local thumbnail images.
+- `MoreProjects` — a separate secondary project index for U-Cash, PALDEX, and Send Notes, using `src/lib/moreProjects.ts` and the shared project card and animated modal.
 - `TechStack` — the portfolio's technologies.
 - `Contact` — a client-side form using the contact hook and schema.
 
@@ -111,7 +112,7 @@ PORTFOLIO/
 └── CLAUDE.md
 ```
 
-`assets/` is the larger source/reference image archive. `src/app/images/` contains images imported by the website, while `public/` contains files addressable directly from the site root. `.next/` and `node_modules/` are generated/local dependency directories. The configured build output is `out/`.
+`assets/` is the larger source/reference image archive. `PROJECTS/` contains standalone reference applications and is excluded from the portfolio's TypeScript and ESLint checks. `src/app/images/` contains images imported by the website, while `public/` contains files addressable directly from the site root. `.next/` and `node_modules/` are generated/local dependency directories. The configured build output is `out/`.
 
 ### Source responsibilities
 
@@ -127,7 +128,28 @@ PORTFOLIO/
 
 ### Portfolio content
 
-Project card metadata is defined in the `FeaturedProjects` component, and the project detail pages are authored as route components. Images used by the pages are imported from `src/app/images/Projects/`; there is no content database or CMS configured in this repository.
+Project card metadata and modal detail content for CarbonSense, FinShield, DaguConnect, and AnchorWatch are defined in `FeaturedProjects`, using the project experience in `public/file/Karlossonrivo_Resume.pdf`. Each card is a button that opens `ProjectPreview`, a client component portaled to the document body using a native modal dialog. The card center supplies its certificate-style animation origin. It locks background scrolling, suspends Lenis through `projectPreviewChange`, and guards hero gestures through `data-project-preview-open`. Closing restores focus and scrolling after the exit animation without changing the URL; quiet motion dismisses immediately. The content scroll region hides its scrollbar without disabling wheel, touch, or keyboard access. `ProjectLogo` presents compact local brand assets in card and modal headers using unoptimized images compatible with static export. `TechnologyLabel` centralizes the named technology-to-icon mapping for both card and modal lists, using existing react-icons and Lucide dependencies. The existing project detail routes remain available for direct links and retain their screenshots. There is no content database or CMS configured in this repository.
+
+Logo assets are byte-for-byte copies from the standalone reference applications:
+
+| Public asset | Original in `PROJECTS/` |
+| --- | --- |
+| `public/projects/logos/finshield.svg` | `FINSHIELD_MANAGEMENT_FRONTEND/public/Logo/FinShield.svg` |
+| `public/projects/logos/daguconnect.png` | `DaguConnectAndroid/app/src/main/res/drawable/daguconnectlogonobg.png` |
+| `public/projects/logos/carbonsense.png` | `CARBONSENSE/FRONTEND/public/CarbonLogo1.png` |
+| `public/projects/logos/anchorwatch.png` | `AnchorWatch_Web_Frontend/public/NewLogo.png` |
+| `public/projects/logos/paldex.png` | `PALDEX-WEBSITE/images/logo/PaldexLogo2.png` |
+| `public/projects/logos/send-notes.png` | `Send-notes/app/src/main/res/drawable/logo.png` |
+
+`MoreProjects` is placed between Featured Projects and Tech Stack in the continuous home-page section background. Both project sections render `ProjectCard` with the same grid and styling, and reuse `ProjectPreview` for modal scroll locking, animation origin, dismissal, and focus restoration. DaguConnect is a single featured entry combining Android and web companion information; its modal identifies the web charts/tables as sample-data previews. The secondary catalog contains U-Cash, PALDEX, and Send Notes and adds no inferred project dates, backend services, or runtime dependencies. U-Cash's compact branding uses the supplied `public/projects/logos/ucash.jpg` wordmark viewport; its dashboard sample follows the Java source and original graphics now supplied in `PROJECTS/UCASH/UCASH/`.
+
+### Dashboard sample screens
+
+`ProjectSampleViewer` reuses the certificate arrival/unseal/seam CSS keyframes. The iframe/native-frame loading signal starts a one-time screen reveal; an animation-end flag clears it, and format changes reset the flag. CSS honors the containing dialog's quiet state, global pause preference, and reduced-motion media query. No additional animation runtime or project startup is required.
+
+All seven project modals expose View sample through `src/lib/projectSamples.ts`. CarbonSense and FinShield use lazy React components copied from their original Next.js dashboards under `src/components/project-samples/`, with fixture adapters replacing authentication and services. Their original dashboard JSX, chart components, UI primitives, tokens, and local logo assets are retained. Recharts, class-variance-authority, and the Radix Slot primitive support those source components; the npm manifest and lockfile match the existing npm CI workflow. `NativeSampleFrame` mounts the components through a React portal into an isolated document with separately compiled source styles. The document permits same-origin access for the portal, but no scripts execute inside it; React executes in the portfolio. Source navigation is intercepted locally, and Escape reaches the existing project dialog. These native samples have no standalone HTML dashboard URL.
+
+The other seven screens are standalone samples in `public/project-samples/`; DaguConnect has web/Android variants, AnchorWatch has web/Flutter variants, and Send Notes has an Android home. PALDEX copies the original home HTML, unchanged CSS, local artwork, and resized source video scenes. AnchorWatch mobile translates the supplied Flutter dashboard and copies its Inter fonts/navigation assets. Dashboard records use fictional fixtures without project services, authentication, or persistence. CSP blocks connections and form submissions. The parent modal retains scroll/focus/motion behavior while expanding for the sample viewer. Source mappings, media preparation, style compilation, regeneration, and verification boundaries are documented in `.docs/PROJECT_SAMPLES.md`.
 
 ### Contact form
 
@@ -143,9 +165,11 @@ The API base URL must be available as `NEXT_PUBLIC_API_URL` during the frontend 
 
 The Tech Stack section exposes `id="skills"`. Desktop/mobile Skills links, hero navigation requests and pending targets, initial hash expansion, Lenis/native scrolling, and active-section tracking all recognize `skills` alongside `projects` and `contact`.
 
-`TechStack.tsx` owns a typed 25-item technology catalog and six filter options: All, Databases, Tools, AI, Languages, and Frameworks. Selected-category state derives the visible semantic list, counts, grid columns, cube elevations, and scene height. Native filter buttons expose pressed states and control the list; a polite status region announces counts. Switching categories clears hover/focus/pinned stand state and pointer tilt. FastAPI is deduplicated; HTML and CSS are separate records. Node.js and Blockchain are grouped under Tools; React and Flutter join the broader Frameworks category. No persistence or URL parameter is required for filters.
+`TechStack.tsx` owns a typed 27-item technology catalog and six filter options: All, Databases, Tools, AI, Languages, and Frameworks. Dart belongs to Languages and the combined CAG/RAG record belongs to AI. Selected-category state derives the visible semantic list, counts, square desktop grid, cube elevations, and scene height. MatchMedia caps phone grids at three columns (two below 360px). Question-mark placeholders fill unused desktop square cells or the final phone row and reveal “Soon” using the existing stand interaction; they are excluded from technology counts. Native filter buttons expose pressed states and control the list; a polite status region announces counts. Switching categories clears hover/focus/pinned stand state and pointer tilt. FastAPI is deduplicated; HTML and CSS are separate records. Node.js and Blockchain are grouped under Tools; React and Flutter join the broader Frameworks category. No persistence or URL parameter is required for filters.
 
 The catalog renders as six-face CSS 3D cubes. The existing viewport observer and document visibility event suspend CSS float animations offscreen or in background tabs; root motion preferences pause or disable them. Fine-pointer parallax writes local CSS variables from the stationary scene wrapper. It introduces no dependencies, external image assets, canvas, or global animation loop.
+
+`src/lib/techStackUsage.ts` supplies descriptions for all 27 technologies and project associations established by local sources or direct user confirmation. Confirmed associations include Docker in FinShield/CarbonSense, Solidity in FinShield, Laravel in Send Notes, and Java in UCash. The Skills section renders the most recently explored technology's description with project-specific usage and compact `ProjectLogo` marks on the left of the desktop cube assembly; tablets/phones stack the description above it. MongoDB is the initial description. The description persists independently of stand dismissal; filters derive a valid fallback from their visible catalog. Placeholder cubes describe upcoming skills. A ResizeObserver measures the scene column and sets its local scale, with cleanup on filter changes/unmount. Additional local badge assets for Send Notes and PalDex are copied from their reference apps under `PROJECTS/`. UCash uses its original screenshot from `assets/PROJECTS/UCASH/`, with CSS framing its existing U mark. No network requests or dependencies are added.
 
 Native cube buttons control decorative upright acrylic logo stands. Local hover, keyboard-focus, and pinned-selection state determine the single active technology; `useId` binds each button to its stand. A document pointer listener exists only while a stand is pinned and cleans up on dismissal/unmount. Escape and outside presses dismiss pinned stands. The stand is composed from existing SVG icons and CSS 3D planes, with immediate state changes for paused/reduced motion.
 

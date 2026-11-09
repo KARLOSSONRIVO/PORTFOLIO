@@ -95,7 +95,7 @@ function HeroGeometric({
             return delta > 0 ? intro.scrollTop + intro.clientHeight < intro.scrollHeight - 2 : intro.scrollTop > 0;
         };
         const handleWheel = (e: WheelEvent) => {
-            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
+            if (document.documentElement.dataset.certificatePreviewOpen === "true" || document.documentElement.dataset.projectPreviewOpen === "true") return;
             const exp = expanded;
 
             if (exp) {
@@ -139,12 +139,12 @@ function HeroGeometric({
         };
 
         const handleTouchStart = (e: TouchEvent) => {
-            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
+            if (document.documentElement.dataset.certificatePreviewOpen === "true" || document.documentElement.dataset.projectPreviewOpen === "true") return;
             touchStartY.current = e.touches[0].clientY;
         };
 
         const handleTouchMove = (e: TouchEvent) => {
-            if (document.documentElement.dataset.certificatePreviewOpen === "true") return;
+            if (document.documentElement.dataset.certificatePreviewOpen === "true" || document.documentElement.dataset.projectPreviewOpen === "true") return;
             const exp = expanded;
             const touchY = e.touches[0].clientY;
             const deltaY = touchStartY.current - touchY;

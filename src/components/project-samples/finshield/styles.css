@@ -1,0 +1,61 @@
+@import "tailwindcss" source(none);
+@source "./";
+@custom-variant dark (&:where(.dark,.dark *));
+:root {
+  --font-heading: var(--font-body);
+  --ink: #111827;
+  --ink-2: #303742;
+  --navy-elevated: #1f2937;
+  --primary: #90e3bd;
+  --primary-hover: #7dd9af;
+  --primary-pressed: #0b9562;
+  --primary-soft: #eafbf3;
+  --teal: #0eaa70;
+  --teal-hover: #0b9562;
+  --teal-soft: #eafbf3;
+  --cyan: #46c7d7;
+  --brass: #9b651c;
+  --paper: #fbfcfc;
+  --surface: #ffffff;
+  --surface-muted: #f7f8f8;
+  --line: #e1e5e8;
+  --line-strong: #cbd2d7;
+  --muted: #6b7280;
+  --danger: #ef4444;
+  --warning: #9b651c;
+  --info: #176b78;
+  --tax-vat-ink: #075f42;
+  --tax-vat-bg: #e6f8ef;
+  --tax-vat-line: #bde9d1;
+  --tax-non-vat-ink: #596273;
+  --tax-non-vat-bg: #f2f4f6;
+  --tax-non-vat-line: #dfe3e8;
+  --alert-danger-bg: #fef2f2;
+  --alert-danger-border: #fecaca;
+  --alert-danger-ink: #991b1b;
+  --alert-warning-bg: #fffbeb;
+  --alert-warning-border: #fde68a;
+  --alert-warning-ink: #92400e;
+  --alert-success-bg: #ecfdf5;
+  --alert-success-border: #a7f3d0;
+  --alert-success-ink: #065f46;
+  --alert-info-bg: #eaf8fa;
+  --alert-info-border: #b8e4ea;
+  --alert-info-ink: #176b78;
+  --alert-neutral-bg: #f2f4f6;
+  --alert-neutral-border: #dfe3e8;
+  --alert-neutral-ink: #596273;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --button-radius: 6px;
+  --shadow: 0 1px 2px rgba(17, 24, 39, .08), 0 8px 24px rgba(17, 24, 39, .04);
+  --shadow-float: 0 18px 48px rgba(17, 24, 39, .16);
+  --focus-ring: 0 0 0 3px rgba(14, 170, 112, .2);
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+}
+
+body{margin:0;font-family:var(--font-finshield-body),Inter,Arial,sans-serif;background:var(--paper);color:var(--ink);font-size:14px;}
+button,a{touch-action:manipulation}button{cursor:pointer}*:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

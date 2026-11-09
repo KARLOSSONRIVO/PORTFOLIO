@@ -9,7 +9,7 @@ import { useSitePreferences } from "@/hooks/useSitePreferences";
 /**
  * Native scrolling on touch-first devices; demand-driven Lenis elsewhere.
  * The hero's section events coordinate navigation and the initial scroll lock.
- * Certificate previews suspend scrolling until their modal is dismissed.
+ * Certificate and project previews suspend scrolling until their modal is dismissed.
  */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const { paused } = useSitePreferences();
@@ -115,7 +115,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
     window.addEventListener("heroSectionChange", handleHeroSection);
 
-    const handleCertificatePreview = (event: Event) => {
+    const handlePreview = (event: Event) => {
       const { open } = (event as CustomEvent<{ open: boolean }>).detail;
       clearTimeout(startTimer.id);
       if (open) {
@@ -127,11 +127,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         lenis.scrollTo(window.scrollY, { immediate: true, force: true });
       }
     };
-    window.addEventListener("certificatePreviewChange", handleCertificatePreview);
+    window.addEventListener("certificatePreviewChange", handlePreview);
+    window.addEventListener("projectPreviewChange", handlePreview);
 
     return () => {
       window.removeEventListener("heroSectionChange", handleHeroSection);
-      window.removeEventListener("certificatePreviewChange", handleCertificatePreview);
+      window.removeEventListener("certificatePreviewChange", handlePreview);
+      window.removeEventListener("projectPreviewChange", handlePreview);
       clearTimeout(startTimer.id);
       document.removeEventListener("visibilitychange", handleVisibility);
       unsubscribeVirtualScroll?.();

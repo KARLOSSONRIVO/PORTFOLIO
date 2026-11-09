@@ -5,14 +5,16 @@ import { BrainCircuit, CodeXml, Database, Grid2X2, Layers, Link as LinkIcon, Wre
 import {
   SiTypescript, SiNextdotjs, SiReact, SiNodedotjs,
   SiExpress, SiFastapi, SiMongodb, SiPython,
-  SiFlutter, SiKotlin,
+  SiFlutter, SiKotlin, SiDart,
   SiRedis, SiDocker, SiGit, SiMysql, SiPostgresql, SiOllama,
   SiSolidity, SiHtml5, SiCss, SiLaravel, SiPhp, SiDjango, SiJavascript,
 } from "react-icons/si";
-import type { IconType } from "react-icons";
+import type { IconBaseProps, IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
 import { useInView, useReducedMotion } from "framer-motion";
 import { useSitePreferences } from "@/hooks/useSitePreferences";
+import { ProjectLogo } from "@/components/ui/ProjectLogo";
+import { stackProjects, techStackUsage } from "@/lib/techStackUsage";
 
 const categories = [
   { id: "all", label: "All", icon: Grid2X2 },
@@ -30,7 +32,12 @@ type Technology = {
   category: Exclude<CategoryFilter, "all">;
   color: string;
   lightColor: string;
+  placeholder?: boolean;
 };
+
+function QuestionMark(props: IconBaseProps) {
+  return <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M9 7a3 3 0 0 1 6 0c0 1.3-.7 2-1.9 2.9C11.7 11 11 12 11 14v1h2v-1c0-1.2.3-1.7 1.4-2.5C15.9 10.4 17 9.2 17 7A5 5 0 0 0 7 7h2Zm2 11h2v3h-2Z" /></svg>;
+}
 
 const tools: Technology[] = [
   { name: "TypeScript", icon: SiTypescript, category: "languages", color: "#3178c6", lightColor: "#3178c6" },
@@ -43,6 +50,7 @@ const tools: Technology[] = [
   { name: "FastAPI", icon: SiFastapi, category: "frameworks", color: "#35d4bd", lightColor: "#007f70" },
   { name: "Blockchain", icon: LinkIcon, category: "tools", color: "#b59cff", lightColor: "#7447b8" },
   { name: "Flutter", icon: SiFlutter, category: "frameworks", color: "#54c5f8", lightColor: "#087baa" },
+  { name: "Dart", icon: SiDart, category: "languages", color: "#54c5f8", lightColor: "#0175c2" },
   { name: "Kotlin", icon: SiKotlin, category: "languages", color: "#bb75ff", lightColor: "#7f3fbf" },
   { name: "Java", icon: FaJava, category: "languages", color: "#f89820", lightColor: "#b85b00" },
   { name: "Redis", icon: SiRedis, category: "databases", color: "#ff655a", lightColor: "#c52c23" },
@@ -51,6 +59,7 @@ const tools: Technology[] = [
   { name: "MySQL", icon: SiMysql, category: "databases", color: "#63b5df", lightColor: "#00618a" },
   { name: "PostgreSQL", icon: SiPostgresql, category: "databases", color: "#81b6e5", lightColor: "#336791" },
   { name: "Ollama", icon: SiOllama, category: "ai", color: "#f5f5f5", lightColor: "#242424" },
+  { name: "CAG/RAG", icon: BrainCircuit, category: "ai", color: "#b59cff", lightColor: "#7447b8" },
   { name: "Solidity", icon: SiSolidity, category: "languages", color: "#adb6ff", lightColor: "#5559a0" },
   { name: "HTML", icon: SiHtml5, category: "languages", color: "#ff794f", lightColor: "#c23e1b" },
   { name: "CSS", icon: SiCss, category: "languages", color: "#a970ff", lightColor: "#7232bc" },
@@ -70,13 +79,57 @@ export function TechStack() {
   const [hoveredTechnology, setHoveredTechnology] = useState<string | null>(null);
   const [focusedTechnology, setFocusedTechnology] = useState<string | null>(null);
   const [pinnedTechnology, setPinnedTechnology] = useState<string | null>(null);
+  const [mobileColumns, setMobileColumns] = useState<number | null>(null);
+  const [describedTechnology, setDescribedTechnology] = useState("MongoDB");
   const activeTechnology = hoveredTechnology ?? focusedTechnology ?? pinnedTechnology;
   const visibleTools = selectedCategory === "all" ? tools : tools.filter(tool => tool.category === selectedCategory);
-  const columns = selectedCategory === "all" ? 5 : Math.min(4, visibleTools.length);
-  const rows = Math.ceil(visibleTools.length / columns);
+  const squareColumns = Math.ceil(Math.sqrt(visibleTools.length));
+  const columns = Math.min(squareColumns, mobileColumns ?? squareColumns);
+  const rows = mobileColumns ? Math.ceil(visibleTools.length / columns) : columns;
+  const displayTools: Technology[] = [...visibleTools, ...Array.from({ length: columns * rows - visibleTools.length }, (_, index) => ({
+    name: `upcoming-${index}`, icon: QuestionMark, category: "ai" as const,
+    color: "#c9a5b0", lightColor: "#865269", placeholder: true,
+  }))];
   const sceneHeight = selectedCategory === "all" ? 900 : Math.max(360, (columns + rows) * 72 + 220);
   const listId = `${standId}-technologies`;
   const selectedLabel = categories.find(category => category.id === selectedCategory)?.label;
+  const describedTool = displayTools.find(tool => tool.name === describedTechnology) ?? visibleTools[0];
+  const description = techStackUsage[describedTool.name];
+  const DescriptionIcon = describedTool.icon;
+  const descriptionId = `${standId}-description`;
+
+  useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+    const resizeScene = () => {
+      if (window.innerWidth < 768) {
+        scene.style.removeProperty("--cube-scale");
+        return;
+      }
+      const styles = getComputedStyle(scene);
+      const size = parseFloat(styles.getPropertyValue("--cube-size"));
+      const gap = parseFloat(styles.getPropertyValue("--cube-gap")) || 68;
+      const projectedWidth = (columns * size + (columns - 1) * gap) * Math.SQRT2 + 80;
+      scene.style.setProperty("--cube-scale", String(Math.min(1, (scene.clientWidth - 24) / projectedWidth)));
+    };
+    const observer = new ResizeObserver(resizeScene);
+    observer.observe(scene);
+    resizeScene();
+    return () => observer.disconnect();
+  }, [columns, selectedCategory]);
+
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 767px)");
+    const narrowPhone = window.matchMedia("(max-width: 359px)");
+    const syncColumns = () => setMobileColumns(phone.matches ? (narrowPhone.matches ? 2 : 3) : null);
+    syncColumns();
+    phone.addEventListener("change", syncColumns);
+    narrowPhone.addEventListener("change", syncColumns);
+    return () => {
+      phone.removeEventListener("change", syncColumns);
+      narrowPhone.removeEventListener("change", syncColumns);
+    };
+  }, []);
 
   function selectCategory(category: CategoryFilter) {
     setSelectedCategory(category);
@@ -128,7 +181,7 @@ export function TechStack() {
     }}>
       <div className="tech-cubes-heading">
         <h2 id="tech-stack-title">Tech <span>Stack</span></h2>
-        <p id="tech-stand-hint">Hover or tap a cube to raise its display.</p>
+        <p id="tech-stand-hint">Explore a technology to see where I use it.</p>
       </div>
       <div className="tech-stack-controls" role="group" aria-label="Filter technologies by category">
         {categories.map(category => {
@@ -148,17 +201,47 @@ export function TechStack() {
       <p className="tech-filter-summary" role="status" aria-live="polite" aria-atomic="true">
         {selectedCategory === "all" ? `Showing all ${tools.length} technologies` : `${visibleTools.length} ${visibleTools.length === 1 ? "technology" : "technologies"} in ${selectedLabel}`}
       </p>
+      <div className="tech-stack-layout">
+      <div id={descriptionId} className="tech-stack-description" aria-live="polite" aria-atomic="true"
+        style={{ "--tech-color": describedTool.color, "--tech-color-light": describedTool.lightColor } as CSSProperties}>
+        <div className="tech-description-title">
+          <DescriptionIcon className="tech-description-icon tech-logo" aria-hidden="true" />
+          <h3>{describedTool.placeholder ? "Coming soon" : describedTool.name}</h3>
+        </div>
+        <p className="tech-description-copy">{describedTool.placeholder
+          ? "Always learning, always building. There is more to come."
+          : description.description}</p>
+        {!describedTool.placeholder && description.projects.length > 0 && <>
+          <h4>Used in</h4>
+          <ul className="tech-project-usage">
+            {description.projects.map(usage => {
+              const project = stackProjects[usage.project];
+              return <li key={project.id}>
+                <div className="tech-usage-project">
+                  <ProjectLogo project={project} className="tech-usage-logo" sizes="44px" />
+                  <span>{project.title}</span>
+                </div>
+                <p>{usage.description}</p>
+              </li>;
+            })}
+          </ul>
+        </>}
+      </div>
       <div ref={sceneRef} className="tech-cubes-scene" data-running={inView} data-density={selectedCategory === "all" ? "compact" : "regular"}
         data-count={visibleTools.length} style={{ "--cube-columns": columns, "--scene-height": `${sceneHeight}px` } as CSSProperties}
         onPointerMove={tiltScene} onPointerLeave={resetTilt}>
         <ul id={listId} className="tech-cubes-field" aria-label="Technologies I work with">
-          {visibleTools.map((tool, index) => {
+          {displayTools.map((tool, index) => {
             const Icon = tool.icon;
             const active = activeTechnology === tool.name;
             const displayId = `${standId}-${index}`;
             return (
-              <li key={tool.name} className="tech-cube" data-technology={tool.name} data-category={tool.category} data-active={active}
-                onPointerEnter={event => { if (event.pointerType === "mouse") setHoveredTechnology(tool.name); }}
+              <li key={tool.name} className="tech-cube" data-technology={tool.placeholder ? undefined : tool.name}
+                data-placeholder={tool.placeholder || undefined} data-category={tool.placeholder ? undefined : tool.category} data-active={active}
+                onPointerEnter={event => { if (event.pointerType === "mouse") {
+                  setHoveredTechnology(tool.name);
+                  setDescribedTechnology(tool.name);
+                } }}
                 onPointerLeave={() => setHoveredTechnology(null)}
                 style={{
                 "--tech-color": tool.color,
@@ -167,19 +250,23 @@ export function TechStack() {
                 "--cube-delay": `${index * -0.67}s`,
                 "--cube-duration": `${5.5 + (index % 4) * 0.6}s`,
               } as CSSProperties}>
-                <button className="tech-cube-lift" type="button" aria-label={`${tool.name} display stand`}
-                  aria-expanded={active} aria-controls={displayId} aria-describedby="tech-stand-hint"
-                  onFocus={event => { if (event.currentTarget.matches(":focus-visible")) setFocusedTechnology(tool.name); }}
+                <button className="tech-cube-lift" type="button" aria-label={tool.placeholder ? "Upcoming skill: Soon" : `${tool.name} display stand`}
+                  aria-expanded={active} aria-controls={`${displayId} ${descriptionId}`} aria-describedby="tech-stand-hint"
+                  onFocus={event => { if (event.currentTarget.matches(":focus-visible")) {
+                    setFocusedTechnology(tool.name);
+                    setDescribedTechnology(tool.name);
+                  } }}
                   onBlur={() => setFocusedTechnology(null)}
                   onClick={() => {
                     setFocusedTechnology(null);
+                    setDescribedTechnology(tool.name);
                     setPinnedTechnology(current => current === tool.name ? null : tool.name);
                   }}>
                   <span className="tech-cube-body">
                     <span className="tech-cube-face tech-cube-top">
                       <span className="tech-cube-content">
                         <Icon className="tech-logo" aria-hidden="true" />
-                        <span>{tool.name}</span>
+                        {!tool.placeholder && <span>{tool.name}</span>}
                       </span>
                     </span>
                     <span className="tech-cube-face tech-cube-front" aria-hidden="true"><Icon className="tech-logo" /></span>
@@ -191,8 +278,10 @@ export function TechStack() {
                     <span id={displayId} className="tech-cube-stand" aria-hidden="true">
                       <span className="tech-stand-stem" />
                       <span className="tech-stand-symbol">
-                        <Icon className="tech-stand-etch" />
-                        <Icon className="tech-stand-mark tech-logo" />
+                        {tool.placeholder ? <span className="tech-stand-soon">Soon</span> : <>
+                          <Icon className="tech-stand-etch" />
+                          <Icon className="tech-stand-mark tech-logo" />
+                        </>}
                       </span>
                     </span>
                   </span>
@@ -201,6 +290,7 @@ export function TechStack() {
             );
           })}
         </ul>
+      </div>
       </div>
     </section>
   );
