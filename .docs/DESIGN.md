@@ -175,7 +175,7 @@ The home page flows through Hero/About, Featured Projects, Tech Stack, and Conta
 
 The technology grid starts at two columns. Project images use a 16:9 crop with `object-cover`. The hero uses the dynamic viewport height (`100dvh`) and an expanding card whose dimensions follow interaction progress.
 
-Mobile navigation floats above the bottom safe area. The footer uses `--mobile-nav-clearance` plus 16px for its bottom padding below `md` so trailing content is not covered; desktop vertical padding is 24px. Its brand/social row spans the available width inside `.section-px-sm` gutters, with vertically centered 44px links on desktop and a stacked layout on phones. GitHub and LinkedIn reuse the hero's brand icons; Email uses the Lucide Mail icon. All three icons are 16px, decorative, and followed by visible text labels.
+Mobile navigation floats above the bottom safe area. The footer uses `--mobile-nav-clearance` plus 16px for its bottom padding below `md` so trailing content is not covered; desktop vertical padding is 24px. Its brand/social row spans the available width inside `.section-px-sm` gutters, with vertically centered 44px links on desktop and a stacked layout on phones. Below `md`, the brand, social-link group, and copyright are centered horizontally; wrapped social links also center. At `md` and above, the brand returns to the left and social links to the right. GitHub and LinkedIn reuse the hero's brand icons; Email uses the Lucide Mail icon. All three icons are 16px, decorative, and followed by visible text labels.
 
 ## Elevation & Depth
 
