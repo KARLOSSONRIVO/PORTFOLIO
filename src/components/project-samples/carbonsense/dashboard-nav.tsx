@@ -74,7 +74,7 @@ export function DashboardNav() {
           aria-label="Go to Dashboard"
         >
           <img 
-            src="/project-samples/assets/carbonsense/CarbonLogo1.png" 
+            src="/project-samples/assets/carbonsense/CarbonLogo1.webp"
             alt="CarbonSense Logo" 
             className="h-14 w-14 rounded-lg group-hover:scale-110 transition-transform duration-300"
           />

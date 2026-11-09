@@ -1,0 +1,726 @@
+{
+  "images": [
+    {
+      "project": "ANCHORWATCH",
+      "src": "/projects/gallery/anchorwatch--screenshot-2025-10-03-142130.webp",
+      "thumbnail": "/projects/gallery/anchorwatch--screenshot-2025-10-03-142130.thumb.webp",
+      "width": 374,
+      "height": 714,
+      "originalBytes": 54387,
+      "bytes": 21378
+    },
+    {
+      "project": "ANCHORWATCH",
+      "src": "/projects/gallery/anchorwatch--screenshot-2025-10-03-142135.webp",
+      "thumbnail": "/projects/gallery/anchorwatch--screenshot-2025-10-03-142135.thumb.webp",
+      "width": 389,
+      "height": 819,
+      "originalBytes": 72399,
+      "bytes": 27604
+    },
+    {
+      "project": "ANCHORWATCH",
+      "src": "/projects/gallery/anchorwatch--screenshot-2025-10-06-102527.webp",
+      "thumbnail": "/projects/gallery/anchorwatch--screenshot-2025-10-06-102527.thumb.webp",
+      "width": 335,
+      "height": 786,
+      "originalBytes": 69660,
+      "bytes": 21202
+    },
+    {
+      "project": "ANCHORWATCH",
+      "src": "/projects/gallery/anchorwatch--screenshot-2025-10-07-090008.webp",
+      "thumbnail": "/projects/gallery/anchorwatch--screenshot-2025-10-07-090008.thumb.webp",
+      "width": 386,
+      "height": 758,
+      "originalBytes": 100267,
+      "bytes": 40844
+    },
+    {
+      "project": "ANCHORWATCH",
+      "src": "/projects/gallery/anchorwatch--screenshot-2026-01-11-093342.webp",
+      "thumbnail": "/projects/gallery/anchorwatch--screenshot-2026-01-11-093342.thumb.webp",
+      "width": 1914,
+      "height": 1001,
+      "originalBytes": 374146,
+      "bytes": 212710
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-28-205327.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-28-205327.thumb.webp",
+      "width": 988,
+      "height": 768,
+      "originalBytes": 89470,
+      "bytes": 27864
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102600.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102600.thumb.webp",
+      "width": 1909,
+      "height": 1007,
+      "originalBytes": 287727,
+      "bytes": 132110
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102605.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102605.thumb.webp",
+      "width": 1918,
+      "height": 995,
+      "originalBytes": 260089,
+      "bytes": 113410
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102615.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102615.thumb.webp",
+      "width": 1902,
+      "height": 982,
+      "originalBytes": 286267,
+      "bytes": 95438
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102621.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102621.thumb.webp",
+      "width": 1914,
+      "height": 1010,
+      "originalBytes": 110444,
+      "bytes": 41370
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102628.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102628.thumb.webp",
+      "width": 1904,
+      "height": 991,
+      "originalBytes": 136880,
+      "bytes": 57582
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102633.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102633.thumb.webp",
+      "width": 1919,
+      "height": 1000,
+      "originalBytes": 154487,
+      "bytes": 63064
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102649.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102649.thumb.webp",
+      "width": 1919,
+      "height": 1005,
+      "originalBytes": 135312,
+      "bytes": 74280
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102654.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102654.thumb.webp",
+      "width": 1917,
+      "height": 1005,
+      "originalBytes": 154891,
+      "bytes": 61918
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102658.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102658.thumb.webp",
+      "width": 1915,
+      "height": 1009,
+      "originalBytes": 99496,
+      "bytes": 41242
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102702.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102702.thumb.webp",
+      "width": 1919,
+      "height": 1003,
+      "originalBytes": 115413,
+      "bytes": 41838
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102706.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102706.thumb.webp",
+      "width": 1898,
+      "height": 994,
+      "originalBytes": 107871,
+      "bytes": 44616
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102711.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102711.thumb.webp",
+      "width": 1919,
+      "height": 1002,
+      "originalBytes": 137097,
+      "bytes": 56378
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102715.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102715.thumb.webp",
+      "width": 1919,
+      "height": 997,
+      "originalBytes": 110109,
+      "bytes": 40626
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102719.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102719.thumb.webp",
+      "width": 1919,
+      "height": 1002,
+      "originalBytes": 128023,
+      "bytes": 46510
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102723.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102723.thumb.webp",
+      "width": 1917,
+      "height": 981,
+      "originalBytes": 121019,
+      "bytes": 45836
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102729.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102729.thumb.webp",
+      "width": 1918,
+      "height": 1000,
+      "originalBytes": 131877,
+      "bytes": 53854
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102733.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102733.thumb.webp",
+      "width": 1919,
+      "height": 1005,
+      "originalBytes": 113050,
+      "bytes": 43814
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-09-29-102737.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-09-29-102737.thumb.webp",
+      "width": 1917,
+      "height": 981,
+      "originalBytes": 95523,
+      "bytes": 34388
+    },
+    {
+      "project": "CARBONSENSE",
+      "src": "/projects/gallery/carbonsense--screenshot-2025-10-22-115955.webp",
+      "thumbnail": "/projects/gallery/carbonsense--screenshot-2025-10-22-115955.thumb.webp",
+      "width": 1917,
+      "height": 991,
+      "originalBytes": 672221,
+      "bytes": 462914
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--bookinglist.webp",
+      "thumbnail": "/projects/gallery/daguconnec--bookinglist.thumb.webp",
+      "width": 1919,
+      "height": 992,
+      "originalBytes": 101523,
+      "bytes": 34862
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--dashboard-1.webp",
+      "thumbnail": "/projects/gallery/daguconnec--dashboard-1.thumb.webp",
+      "width": 1916,
+      "height": 988,
+      "originalBytes": 106417,
+      "bytes": 39838
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--dashboard-2.webp",
+      "thumbnail": "/projects/gallery/daguconnec--dashboard-2.thumb.webp",
+      "width": 1919,
+      "height": 992,
+      "originalBytes": 118182,
+      "bytes": 45400
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--loginpage.webp",
+      "thumbnail": "/projects/gallery/daguconnec--loginpage.thumb.webp",
+      "width": 1918,
+      "height": 995,
+      "originalBytes": 368915,
+      "bytes": 162044
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--profile.webp",
+      "thumbnail": "/projects/gallery/daguconnec--profile.thumb.webp",
+      "width": 1919,
+      "height": 990,
+      "originalBytes": 57209,
+      "bytes": 19862
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--ratings.webp",
+      "thumbnail": "/projects/gallery/daguconnec--ratings.thumb.webp",
+      "width": 1915,
+      "height": 990,
+      "originalBytes": 35342,
+      "bytes": 11546
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--ratingscard.webp",
+      "thumbnail": "/projects/gallery/daguconnec--ratingscard.thumb.webp",
+      "width": 1919,
+      "height": 996,
+      "originalBytes": 57445,
+      "bytes": 18068
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--reportcard.webp",
+      "thumbnail": "/projects/gallery/daguconnec--reportcard.thumb.webp",
+      "width": 1913,
+      "height": 990,
+      "originalBytes": 124160,
+      "bytes": 43268
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--reportlist.webp",
+      "thumbnail": "/projects/gallery/daguconnec--reportlist.thumb.webp",
+      "width": 1918,
+      "height": 984,
+      "originalBytes": 66845,
+      "bytes": 25078
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--jobslist.webp",
+      "thumbnail": "/projects/gallery/daguconnec--jobslist.thumb.webp",
+      "width": 1919,
+      "height": 995,
+      "originalBytes": 93297,
+      "bytes": 29960
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--usermanagamentcard.webp",
+      "thumbnail": "/projects/gallery/daguconnec--usermanagamentcard.thumb.webp",
+      "width": 1919,
+      "height": 992,
+      "originalBytes": 167478,
+      "bytes": 51504
+    },
+    {
+      "project": "DAGUCONNEC",
+      "src": "/projects/gallery/daguconnec--usermanagement.webp",
+      "thumbnail": "/projects/gallery/daguconnec--usermanagement.thumb.webp",
+      "width": 1919,
+      "height": 994,
+      "originalBytes": 104322,
+      "bytes": 31324
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--archieves.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--archieves.thumb.webp",
+      "width": 1870,
+      "height": 968,
+      "originalBytes": 84036,
+      "bytes": 35140
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--branch-invoice.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--branch-invoice.thumb.webp",
+      "width": 1863,
+      "height": 963,
+      "originalBytes": 85659,
+      "bytes": 29642
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--branch-items.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--branch-items.thumb.webp",
+      "width": 1871,
+      "height": 960,
+      "originalBytes": 76251,
+      "bytes": 33780
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--cashier-management.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--cashier-management.thumb.webp",
+      "width": 1875,
+      "height": 967,
+      "originalBytes": 77033,
+      "bytes": 31642
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--dashboard.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--dashboard.thumb.webp",
+      "width": 1872,
+      "height": 975,
+      "originalBytes": 138046,
+      "bytes": 56242
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--invoice-creation.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--invoice-creation.thumb.webp",
+      "width": 1864,
+      "height": 968,
+      "originalBytes": 124101,
+      "bytes": 45718
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--invoice-verification.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--invoice-verification.thumb.webp",
+      "width": 1883,
+      "height": 966,
+      "originalBytes": 75441,
+      "bytes": 30298
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--refund.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--refund.thumb.webp",
+      "width": 1874,
+      "height": 968,
+      "originalBytes": 85600,
+      "bytes": 37084
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--branch-manager--report.webp",
+      "thumbnail": "/projects/gallery/finshield--branch-manager--report.thumb.webp",
+      "width": 1874,
+      "height": 972,
+      "originalBytes": 141766,
+      "bytes": 97520
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--account-management.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--account-management.thumb.webp",
+      "width": 1910,
+      "height": 993,
+      "originalBytes": 105945,
+      "bytes": 42990
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--archieves.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--archieves.thumb.webp",
+      "width": 1919,
+      "height": 993,
+      "originalBytes": 110228,
+      "bytes": 43304
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--audit-logs.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--audit-logs.thumb.webp",
+      "width": 1918,
+      "height": 989,
+      "originalBytes": 163973,
+      "bytes": 49932
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--branch.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--branch.thumb.webp",
+      "width": 1919,
+      "height": 997,
+      "originalBytes": 117734,
+      "bytes": 47278
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--company-settings.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--company-settings.thumb.webp",
+      "width": 1918,
+      "height": 989,
+      "originalBytes": 141883,
+      "bytes": 54956
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--dashboard.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--dashboard.thumb.webp",
+      "width": 1911,
+      "height": 996,
+      "originalBytes": 160397,
+      "bytes": 63660
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--invoice-creation.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--invoice-creation.thumb.webp",
+      "width": 1911,
+      "height": 988,
+      "originalBytes": 139143,
+      "bytes": 50978
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--invoice-management.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--invoice-management.thumb.webp",
+      "width": 1915,
+      "height": 997,
+      "originalBytes": 102074,
+      "bytes": 34478
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--invoice-numbering.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--invoice-numbering.thumb.webp",
+      "width": 1919,
+      "height": 1001,
+      "originalBytes": 91259,
+      "bytes": 34252
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--invoice-verification.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--invoice-verification.thumb.webp",
+      "width": 1919,
+      "height": 1006,
+      "originalBytes": 93390,
+      "bytes": 35692
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--item-catalog.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--item-catalog.thumb.webp",
+      "width": 1919,
+      "height": 995,
+      "originalBytes": 97663,
+      "bytes": 38404
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--refund.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--refund.thumb.webp",
+      "width": 1908,
+      "height": 1001,
+      "originalBytes": 100031,
+      "bytes": 39752
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--report.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--report.thumb.webp",
+      "width": 1917,
+      "height": 1008,
+      "originalBytes": 167903,
+      "bytes": 112446
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--company-owner--template.webp",
+      "thumbnail": "/projects/gallery/finshield--company-owner--template.thumb.webp",
+      "width": 1919,
+      "height": 989,
+      "originalBytes": 103722,
+      "bytes": 41854
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--cashier--branch-inventory.webp",
+      "thumbnail": "/projects/gallery/finshield--cashier--branch-inventory.thumb.webp",
+      "width": 1915,
+      "height": 1007,
+      "originalBytes": 104345,
+      "bytes": 46662
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--cashier--dashboard.webp",
+      "thumbnail": "/projects/gallery/finshield--cashier--dashboard.thumb.webp",
+      "width": 1917,
+      "height": 973,
+      "originalBytes": 113174,
+      "bytes": 48574
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--cashier--invoice-creation.webp",
+      "thumbnail": "/projects/gallery/finshield--cashier--invoice-creation.thumb.webp",
+      "width": 1904,
+      "height": 1003,
+      "originalBytes": 118193,
+      "bytes": 43614
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--cashier--invoice-verification.webp",
+      "thumbnail": "/projects/gallery/finshield--cashier--invoice-verification.thumb.webp",
+      "width": 1908,
+      "height": 983,
+      "originalBytes": 67694,
+      "bytes": 27700
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--cashier--invoice.webp",
+      "thumbnail": "/projects/gallery/finshield--cashier--invoice.thumb.webp",
+      "width": 1906,
+      "height": 992,
+      "originalBytes": 62094,
+      "bytes": 25796
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--account-management.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--account-management.thumb.webp",
+      "width": 1915,
+      "height": 984,
+      "originalBytes": 174111,
+      "bytes": 60164
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--announcement.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--announcement.thumb.webp",
+      "width": 1918,
+      "height": 997,
+      "originalBytes": 175492,
+      "bytes": 72916
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--blockchain-transaction.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--blockchain-transaction.thumb.webp",
+      "width": 1918,
+      "height": 997,
+      "originalBytes": 115357,
+      "bytes": 43366
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--company-management.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--company-management.thumb.webp",
+      "width": 1898,
+      "height": 986,
+      "originalBytes": 160313,
+      "bytes": 52586
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--database-backup.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--database-backup.thumb.webp",
+      "width": 1919,
+      "height": 982,
+      "originalBytes": 181603,
+      "bytes": 72050
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--feedback.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--feedback.thumb.webp",
+      "width": 1914,
+      "height": 987,
+      "originalBytes": 140162,
+      "bytes": 59970
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--invoice.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--invoice.thumb.webp",
+      "width": 1907,
+      "height": 966,
+      "originalBytes": 90902,
+      "bytes": 34308
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--operation-center.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--operation-center.thumb.webp",
+      "width": 1917,
+      "height": 994,
+      "originalBytes": 173051,
+      "bytes": 72154
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--report.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--report.thumb.webp",
+      "width": 1918,
+      "height": 993,
+      "originalBytes": 153067,
+      "bytes": 60740
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--system-administratiobn.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--system-administratiobn.thumb.webp",
+      "width": 1915,
+      "height": 986,
+      "originalBytes": 186364,
+      "bytes": 76396
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--system-administration--archieves.webp",
+      "thumbnail": "/projects/gallery/finshield--system-administration--archieves.thumb.webp",
+      "width": 1919,
+      "height": 968,
+      "originalBytes": 109600,
+      "bytes": 42644
+    },
+    {
+      "project": "FINSHIELD",
+      "src": "/projects/gallery/finshield--screenshot-2026-10-22-232310.webp",
+      "thumbnail": "/projects/gallery/finshield--screenshot-2026-10-22-232310.thumb.webp",
+      "width": 1918,
+      "height": 992,
+      "originalBytes": 398634,
+      "bytes": 194098
+    },
+    {
+      "project": "PALDEX",
+      "src": "/projects/gallery/paldex--screenshot-2026-01-11-093643.webp",
+      "thumbnail": "/projects/gallery/paldex--screenshot-2026-01-11-093643.thumb.webp",
+      "width": 1451,
+      "height": 856,
+      "originalBytes": 1139823,
+      "bytes": 629892
+    },
+    {
+      "project": "Send Notes",
+      "src": "/projects/gallery/send-notes--screenshot-2026-01-11-095847.webp",
+      "thumbnail": "/projects/gallery/send-notes--screenshot-2026-01-11-095847.thumb.webp",
+      "width": 404,
+      "height": 841,
+      "originalBytes": 129300,
+      "bytes": 65366
+    },
+    {
+      "project": "UCASH",
+      "src": "/projects/gallery/ucash--331a04e0-d313-4057-90e9-fd6e8a824ad4.webp",
+      "thumbnail": "/projects/gallery/ucash--331a04e0-d313-4057-90e9-fd6e8a824ad4.thumb.webp",
+      "width": 651,
+      "height": 769,
+      "originalBytes": 73325,
+      "bytes": 37634
+    }
+  ],
+  "originalBytes": 11969142,
+  "bytes": 5269216
+}

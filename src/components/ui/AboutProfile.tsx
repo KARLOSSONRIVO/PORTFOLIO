@@ -100,7 +100,7 @@ export const AboutProfile = memo(function AboutProfile({ active = false }: { act
                     <span className="about-profile-callout about-profile-callout-web" aria-hidden="true"><i />Web &amp; mobile<span /></span>
                     <span className="about-profile-callout about-profile-callout-backend" aria-hidden="true"><span /><i />Backend &amp; AI</span>
                     <div className="about-profile-photo">
-                        <Image src="/images/karlos-rivo-about-crossed-arms.png" alt="Karlos Son Rivo with arms crossed, wearing a charcoal crewneck shirt" width={1024} height={1536} sizes="(max-width: 767px) 90vw, (max-width: 1023px) 60vw, 40vw" unoptimized />
+                        <Image src="/images/karlos-rivo-about-crossed-arms.webp" alt="Karlos Son Rivo with arms crossed, wearing a charcoal crewneck shirt" width={1024} height={1536} sizes="(max-width: 767px) 90vw, (max-width: 1023px) 60vw, 40vw" unoptimized />
                     </div>
                 </div>
             </div>

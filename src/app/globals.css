@@ -571,6 +571,31 @@ html[data-theme="light"] .portfolio-sections-background {
   --section-tint-end: 2%;
 }
 
+/* Original project screens form six slow, alternating strips behind the cards. */
+.project-showcase { position: relative; isolation: isolate; }
+.project-showcase > section { position: relative; z-index: 1; }
+.project-background { position: absolute; inset: 0; z-index: 0; overflow: clip; pointer-events: none; opacity: .26; mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 92%, transparent); }
+.project-background-wall { position: sticky; top: 0; display: grid; grid-template-rows: repeat(6,minmax(0,1fr)); gap: 16px; height: max(740px,100svh); padding-block: 16px; transform: rotate(-5deg) scale(1.12); transform-origin: center; }
+.project-background-row { min-height: 0; }
+.project-background-track { display: flex; width: max-content; height: 100%; animation: project-wall-scroll var(--row-duration) linear infinite var(--row-direction); animation-play-state: paused; }
+.project-background[data-active="true"] .project-background-track { animation-play-state: running; }
+.project-background-group { display: flex; flex-shrink: 0; gap: 16px; height: 100%; padding-right: 16px; }
+.project-background-image { width: clamp(240px,25vw,340px); height: 100%; overflow: hidden; border-radius: 9px; background: #18181b; border: 1px solid #ffffff18; }
+.project-background-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.project-background::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg,var(--color-background),transparent 25%,transparent 75%,var(--color-background)); }
+html[data-theme="light"] .project-background { opacity: .22; }
+html[data-motion-paused="true"] .project-background .project-background-track { animation-play-state: paused; }
+html[data-project-preview-open="true"] .project-background .project-background-track { animation-play-state: paused; }
+@keyframes project-wall-scroll { to { transform: translateX(-50%); } }
+@media(max-width:600px) {
+  .project-background-wall { gap: 12px; transform: rotate(-5deg) scale(1.2); }
+  .project-background-group { gap: 12px; padding-right: 12px; }
+  .project-background-image { width: 220px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .project-background .project-background-track { animation: none; }
+}
+
 /* The stack is an isometric assembly of raised technology blocks. */
 .tech-cubes-section {
   --cube-size: 128px;

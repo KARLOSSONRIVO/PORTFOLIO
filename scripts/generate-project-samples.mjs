@@ -1,10 +1,11 @@
-import { mkdir, copyFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import * as icons from "lucide-react";
 import {generatePaldex} from "./project-samples/paldex.mjs";
 import {generateAnchorWatchMobile} from "./project-samples/anchorwatch-mobile.mjs";
+import {copySampleAsset} from "./project-samples/copy-image.mjs";
 
 // Read-only access to project assets. Never import, build, or start a project.
 const output = resolve("public/project-samples");
@@ -18,7 +19,7 @@ const copies = [
   ["PROJECTS/UCASH/UCASH/src/UCASH IMAGES/BUTTONS/Expense History OPEN.png", "assets/ucash-history.png"],
   ["PROJECTS/UCASH/UCASH/src/UCASH IMAGES/BUTTONS/Exit OPEN.png", "assets/ucash-exit.png"],
 ];
-for (const [from, to] of copies) await copyFile(resolve(from), resolve(output, to));
+for (const [from, to] of copies) await copySampleAsset(resolve(from), resolve(output, to.replace(/\.png$/i,".webp")));
 
 const icon = (name, size = 18) => renderToStaticMarkup(createElement(icons[name] ?? icons.Circle, { size, "aria-hidden": true, strokeWidth: 1.7 }));
 const esc = text => String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;");
@@ -46,7 +47,7 @@ const pageHeader = (title, description, controls = "") => `<header class="page-h
 const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const bookingCounts = [18,24,21,29,34,31,27];
-const daguWeb = shell({name:"DaguConnect",brand:"daguconnect.png",theme:"dagu-web",nav:[["Dashboard","LayoutDashboard"],["User Management","Users"],["Bookings","CalendarDays"],["Ratings","Star"],["Payments","Wallet"],["Reports","Flag"]],body:`
+const daguWeb = shell({name:"DaguConnect",brand:"daguconnect.webp",theme:"dagu-web",nav:[["Dashboard","LayoutDashboard"],["User Management","Users"],["Bookings","CalendarDays"],["Ratings","Star"],["Payments","Wallet"],["Reports","Flag"]],body:`
  ${pageHeader("Dashboard Overview","Monday, November 9, 2026",search("Search bookings"))}
  <section class="dagu-welcome"><span class="avatar large">AS</span><div><h2>Good morning, Alex!</h2><p>Here is your service marketplace at a glance.</p></div>${button("View reports","ArrowUpRight")}</section>
  <div class="metrics four">${metric("Total users","1,284","Clients and tradespeople")}${metric("Active users","936","Active in the sample period")}${metric("Total bookings",sum(bookingCounts),"This week's service requests")}${metric("Average rating","4.8 <em>/ 5</em>","From 96 sample reviews")}</div>
@@ -55,7 +56,7 @@ const daguWeb = shell({name:"DaguConnect",brand:"daguconnect.png",theme:"dagu-we
 if(sum(bookingCounts)!==148+24+12)throw Error("Booking totals must reconcile");
 
 const transfers=[1.24,1.58,1.42,1.91,2.12,1.83,2.28];
-const anchorwatch=shell({name:"AnchorWatch",brand:"anchorwatch.png",theme:"anchorwatch",nav:[["Dashboard","LayoutDashboard"],["Analytics","ChartNoAxesCombined"],["Users","Users"],["Feedback","MessagesSquare"],["Monitoring","Activity"],["Settings","Settings"]],body:`
+const anchorwatch=shell({name:"AnchorWatch",brand:"anchorwatch.webp",theme:"anchorwatch",nav:[["Dashboard","LayoutDashboard"],["Analytics","ChartNoAxesCombined"],["Users","Users"],["Feedback","MessagesSquare"],["Monitoring","Activity"],["Settings","Settings"]],body:`
  ${pageHeader("Dashboard","Stablecoin activity and macro indicators · sample snapshot",button("Refresh","RefreshCw","The fictional dashboard snapshot is already up to date."))}
  <div class="market-strip"><span>${icon("Globe")}United States</span><span>Sample period: November 2–8, 2026</span>${tag("Fictional market data","neutral")}</div>
  <div class="metrics three">${metric("Total USDC stablecoin volume",`$${sum(transfers).toFixed(2)}M`,"Across the seven sample days")}${metric("Avg. transaction value","$1,420","Sample transaction distribution")}${metric("Inflation indicator","2.4%","Illustrative annual rate · United States")}</div>
@@ -73,11 +74,11 @@ const notes=[
  ["UX","Interface design checklist","Clear hierarchy, accessible contrast, and useful feedback.","Nov 6 · 9:15 AM","note-peach"],
  ["KT","Kotlin study notes","Null safety, data classes, and coroutines at a glance.","Nov 5 · 2:40 PM","note-mint"],
 ];
-const sendNotes=`<div class="mobile-app send-notes">${statusbar}<header class="notes-header"><div class="brand"><img src="../projects/logos/send-notes.png" alt=""><div><h1>Send Notes</h1><p>A little clarity for your day.</p></div></div><span class="avatar">AS</span></header><main class="mobile-content">${search("Search here")}<div class="notes-filter" role="group" aria-label="Sample content type"><button class="selected" data-note-filter="all" aria-pressed="true">All</button><button data-note-filter="notes" aria-pressed="false">My notes</button><button data-note-filter="flashcards" aria-pressed="false">Flashcards</button></div><div class="section-row"><h2>Recently opened</h2><span>4 notes</span></div><div class="notes-list">${notes.map(([initial,title,body,date,tint])=>`<article class="note ${tint}" data-note-kind="notes" data-searchable data-search-text="${title} ${body}"><div class="note-top"><span>${initial}</span>${icon("MoreHorizontal",18)}</div><h3>${title}</h3><p>${body}</p><small>${date}</small></article>`).join("")}<article class="note note-lilac" data-note-kind="flashcards" hidden data-searchable data-search-text="Web development flashcards"><div class="note-top"><span>${icon("Layers",20)}</span><small>12 cards</small></div><h3>Web development</h3><p>What does an HTTP 201 response mean?</p><small>Created · November 7</small></article></div><p class="empty-search" hidden>No sample notes match your search.</p><button class="notes-fab" type="button" data-hint="Note editing is outside this dashboard sample." aria-label="Create a note">${icon("Plus",27)}</button></main>${mobileNav([["Home","House"],["My notes","NotebookPen"],["Flashcards","Layers"],["Settings","Settings"]])}</div>`;
+const sendNotes=`<div class="mobile-app send-notes">${statusbar}<header class="notes-header"><div class="brand"><img src="../projects/logos/send-notes.webp" alt=""><div><h1>Send Notes</h1><p>A little clarity for your day.</p></div></div><span class="avatar">AS</span></header><main class="mobile-content">${search("Search here")}<div class="notes-filter" role="group" aria-label="Sample content type"><button class="selected" data-note-filter="all" aria-pressed="true">All</button><button data-note-filter="notes" aria-pressed="false">My notes</button><button data-note-filter="flashcards" aria-pressed="false">Flashcards</button></div><div class="section-row"><h2>Recently opened</h2><span>4 notes</span></div><div class="notes-list">${notes.map(([initial,title,body,date,tint])=>`<article class="note ${tint}" data-note-kind="notes" data-searchable data-search-text="${title} ${body}"><div class="note-top"><span>${initial}</span>${icon("MoreHorizontal",18)}</div><h3>${title}</h3><p>${body}</p><small>${date}</small></article>`).join("")}<article class="note note-lilac" data-note-kind="flashcards" hidden data-searchable data-search-text="Web development flashcards"><div class="note-top"><span>${icon("Layers",20)}</span><small>12 cards</small></div><h3>Web development</h3><p>What does an HTTP 201 response mean?</p><small>Created · November 7</small></article></div><p class="empty-search" hidden>No sample notes match your search.</p><button class="notes-fab" type="button" data-hint="Note editing is outside this dashboard sample." aria-label="Create a note">${icon("Plus",27)}</button></main>${mobileNav([["Home","House"],["My notes","NotebookPen"],["Flashcards","Layers"],["Settings","Settings"]])}</div>`;
 
 const expenses=[{date:"Nov 9",title:"Lunch",category:"Food",amount:120},{date:"Nov 9",title:"Jeepney fare",category:"Transport",amount:30},{date:"Nov 9",title:"Study supplies",category:"Shopping",amount:89.5},{date:"Nov 8",title:"Groceries",category:"Food",amount:640},{date:"Nov 7",title:"Internet",category:"Utilities",amount:999}];
 const today=sum(expenses.filter(e=>e.date==="Nov 9").map(e=>e.amount)), monthly=sum(expenses.map(e=>e.amount));
-const ucash=`<main class="ucash"><div class="ucash-window"><img class="ucash-wordmark" src="assets/ucash-logo.png" alt="U-Cash"><div class="ucash-totals"><div><h1>TODAY'S EXPENSES</h1><strong>${money(today)}</strong></div><div><h2>MONTHLY EXPENSES</h2><strong>${money(monthly)}</strong></div></div><div class="ucash-actions"><button type="button" data-hint="Expense entry is outside this home-screen sample."><img src="assets/ucash-add.png" alt="Add expenses"></button><button type="button" data-toggle-history aria-expanded="false" aria-controls="expense-history"><img src="assets/ucash-history.png" alt="Expense history"></button><button type="button" data-hint="Use Back to details in the project modal to leave the sample."><img src="assets/ucash-exit.png" alt="Exit"></button></div><section class="ucash-history" id="expense-history" hidden><h2>Expense history</h2>${table(["Date","Description","Category","Amount"],expenses.map(e=>[e.date,e.title,e.category,money(e.amount)]))}</section><p class="ucash-caption">November 9, 2026 · Fictional expense records</p></div></main>`;
+const ucash=`<main class="ucash"><div class="ucash-window"><img class="ucash-wordmark" src="assets/ucash-logo.webp" alt="U-Cash"><div class="ucash-totals"><div><h1>TODAY'S EXPENSES</h1><strong>${money(today)}</strong></div><div><h2>MONTHLY EXPENSES</h2><strong>${money(monthly)}</strong></div></div><div class="ucash-actions"><button type="button" data-hint="Expense entry is outside this home-screen sample."><img src="assets/ucash-add.webp" alt="Add expenses"></button><button type="button" data-toggle-history aria-expanded="false" aria-controls="expense-history"><img src="assets/ucash-history.webp" alt="Expense history"></button><button type="button" data-hint="Use Back to details in the project modal to leave the sample."><img src="assets/ucash-exit.webp" alt="Exit"></button></div><section class="ucash-history" id="expense-history" hidden><h2>Expense history</h2>${table(["Date","Description","Category","Amount"],expenses.map(e=>[e.date,e.title,e.category,money(e.amount)]))}</section><p class="ucash-caption">November 9, 2026 · Fictional expense records</p></div></main>`;
 
 const screens=[
  ["daguconnect-desktop","DaguConnect web dashboard",daguWeb,""], ["daguconnect-mobile","DaguConnect Android home",daguMobile,"mobile-page"],

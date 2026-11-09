@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import carbonsenseImg from "@/app/images/Projects/Carbonsense.png";
+const carbonsenseImg = "/projects/images/carbonsense.webp";
 
 export default function CarbonSensePage() {
   return (
@@ -14,7 +14,7 @@ export default function CarbonSensePage() {
 
       <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-10 sm:mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
         <img 
-          src={carbonsenseImg.src} 
+          src={carbonsenseImg}
           alt="CarbonSense Project Screenshot" 
           className="w-full h-full object-cover"
         />

@@ -1,5 +1,6 @@
 import {copyFile,mkdir,writeFile} from "node:fs/promises";
 import {resolve} from "node:path";
+import {copySampleAsset} from "./copy-image.mjs";
 
 // View-only translation of ANCHORWATCH_MOBILE/lib/presentation/screens/dashboard_screen.dart,
 // main_navigation_screen.dart, bottom_navigation_widget.dart and app_theme.dart.
@@ -9,8 +10,8 @@ export async function generateAnchorWatchMobile(output,icon) {
   const assets=resolve(output,"assets/anchorwatch-mobile");
   await mkdir(assets,{recursive:true});
   for(const name of ["Home","Compass","AnchorWise","Notifications","Profile"])
-    await copyFile(resolve(source,`images/Navigation_Icons/${name}.png`),resolve(assets,`${name}.png`));
-  await copyFile(resolve(source,"images/LOGOnoBG.png"),resolve(assets,"logo.png"));
+    await copySampleAsset(resolve(source,`images/Navigation_Icons/${name}.png`),resolve(assets,`${name}.webp`));
+  await copySampleAsset(resolve(source,"images/LOGOnoBG.png"),resolve(assets,"logo.webp"));
   for(const weight of ["Regular","Medium","SemiBold","Bold"])
     await copyFile(resolve(source,`fonts/Inter_18pt-${weight}.ttf`),resolve(assets,`Inter-${weight}.ttf`));
 
@@ -66,8 +67,8 @@ export async function generateAnchorWatchMobile(output,icon) {
     <main><div class="aw-dashboard-heading"><strong>DASHBOARD</strong><select aria-label="Dashboard period" id="aw-period"><option>Monthly</option><option>Yearly</option></select></div>
     <section class="aw-card"><h2>Recent Articles</h2><div class="aw-articles" tabindex="0" aria-label="Recent fictional articles, swipe to explore">${articles.map(a=>`<article><h3>${a.title}</h3><p class="aw-subtle">Sample editorial · Nov 9, 2026</p><p>${a.copy}</p><div class="aw-article-topics"><strong>Topics:</strong><span>${a.tag}</span></div><small>Fictional article · local sample</small></article>`).join("")}</div><div class="aw-dots" aria-hidden="true"><i></i><i></i></div></section>
     ${charts(rows,"Monthly")}${charts(years,"Yearly")}</main>
-    <nav class="aw-bottom-nav" aria-label="Mobile navigation">${nav.map(([label,asset],i)=>`<button type="button" aria-label="${label}" ${i===0?'aria-current="page"':'data-preview-action="'+label+'"'}><span class="aw-nav-image ${i===0?"selected":""}" style="--nav-art:url('assets/anchorwatch-mobile/${asset}.png')"></span><i></i></button>`).join("")}</nav>
-    <div class="aw-drawer-backdrop" id="aw-drawer" hidden><aside aria-label="Navigation drawer"><header><img src="assets/anchorwatch-mobile/logo.png" alt=""><strong>AnchorWatch</strong><button type="button" id="aw-drawer-close" aria-label="Close navigation">${icon("X",20)}</button></header>${nav.map(([label,asset],i)=>`<button type="button" ${i===0?'id="aw-home"':'data-preview-action="'+label+'"'}><span class="aw-nav-image" style="--nav-art:url('assets/anchorwatch-mobile/${asset}.png')"></span>${i===0?"Dashboard":label}</button>`).join("")}</aside></div>
+    <nav class="aw-bottom-nav" aria-label="Mobile navigation">${nav.map(([label,asset],i)=>`<button type="button" aria-label="${label}" ${i===0?'aria-current="page"':'data-preview-action="'+label+'"'}><span class="aw-nav-image ${i===0?"selected":""}" style="--nav-art:url('assets/anchorwatch-mobile/${asset}.webp')"></span><i></i></button>`).join("")}</nav>
+    <div class="aw-drawer-backdrop" id="aw-drawer" hidden><aside aria-label="Navigation drawer"><header><img src="assets/anchorwatch-mobile/logo.webp" alt=""><strong>AnchorWatch</strong><button type="button" id="aw-drawer-close" aria-label="Close navigation">${icon("X",20)}</button></header>${nav.map(([label,asset],i)=>`<button type="button" ${i===0?'id="aw-home"':'data-preview-action="'+label+'"'}><span class="aw-nav-image" style="--nav-art:url('assets/anchorwatch-mobile/${asset}.webp')"></span>${i===0?"Dashboard":label}</button>`).join("")}</aside></div>
     <p class="aw-notice" role="status" hidden></p></div></body></html>`;
   await writeFile(resolve(output,"anchorwatch-mobile.html"),html);
   await writeFile(resolve(output,"assets/anchorwatch-mobile/fixtures.json"),JSON.stringify({monthly:rows,yearly:years,articles},null,2));

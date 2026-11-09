@@ -130,18 +130,20 @@ PORTFOLIO/
 
 Project card metadata and modal detail content for CarbonSense, FinShield, DaguConnect, and AnchorWatch are defined in `FeaturedProjects`, using the project experience in `public/file/Karlossonrivo_Resume.pdf`. Each card is a button that opens `ProjectPreview`, a client component portaled to the document body using a native modal dialog. The card center supplies its certificate-style animation origin. It locks background scrolling, suspends Lenis through `projectPreviewChange`, and guards hero gestures through `data-project-preview-open`. Closing restores focus and scrolling after the exit animation without changing the URL; quiet motion dismisses immediately. The content scroll region hides its scrollbar without disabling wheel, touch, or keyboard access. `ProjectLogo` presents compact local brand assets in card and modal headers using unoptimized images compatible with static export. `TechnologyLabel` centralizes the named technology-to-icon mapping for both card and modal lists, using existing react-icons and Lucide dependencies. The existing project detail routes remain available for direct links and retain their screenshots. There is no content database or CMS configured in this repository.
 
-Logo assets are byte-for-byte copies from the standalone reference applications:
+Logo assets originate in the standalone reference applications. PNG artwork is encoded as WebP for display; existing vectors are retained:
 
 | Public asset | Original in `PROJECTS/` |
 | --- | --- |
 | `public/projects/logos/finshield.svg` | `FINSHIELD_MANAGEMENT_FRONTEND/public/Logo/FinShield.svg` |
-| `public/projects/logos/daguconnect.png` | `DaguConnectAndroid/app/src/main/res/drawable/daguconnectlogonobg.png` |
-| `public/projects/logos/carbonsense.png` | `CARBONSENSE/FRONTEND/public/CarbonLogo1.png` |
-| `public/projects/logos/anchorwatch.png` | `AnchorWatch_Web_Frontend/public/NewLogo.png` |
-| `public/projects/logos/paldex.png` | `PALDEX-WEBSITE/images/logo/PaldexLogo2.png` |
-| `public/projects/logos/send-notes.png` | `Send-notes/app/src/main/res/drawable/logo.png` |
+| `public/projects/logos/daguconnect.webp` | `DaguConnectAndroid/app/src/main/res/drawable/daguconnectlogonobg.png` |
+| `public/projects/logos/carbonsense.webp` | `CARBONSENSE/FRONTEND/public/CarbonLogo1.png` |
+| `public/projects/logos/anchorwatch.webp` | `AnchorWatch_Web_Frontend/public/NewLogo.png` |
+| `public/projects/logos/paldex.webp` | `PALDEX-WEBSITE/images/logo/PaldexLogo2.png` |
+| `public/projects/logos/send-notes.webp` | `Send-notes/app/src/main/res/drawable/logo.png` |
 
 `MoreProjects` is placed between Featured Projects and Tech Stack in the continuous home-page section background. Both project sections render `ProjectCard` with the same grid and styling, and reuse `ProjectPreview` for modal scroll locking, animation origin, dismissal, and focus restoration. DaguConnect is a single featured entry combining Android and web companion information; its modal identifies the web charts/tables as sample-data previews. The secondary catalog contains U-Cash, PALDEX, and Send Notes and adds no inferred project dates, backend services, or runtime dependencies. U-Cash's compact branding uses the supplied `public/projects/logos/ucash.jpg` wordmark viewport; its dashboard sample follows the Java source and original graphics now supplied in `PROJECTS/UCASH/UCASH/`.
+
+`src/app/page.tsx` groups Featured Projects and More Projects inside `.project-showcase`, with `ProjectBackground` behind both sections. It reads the generated `src/lib/projectGallery.ts` catalog for all 80 archive images exported as public WebP assets. Six alternating CSS strips use lightweight thumbnails; observer/visibility state, Pause, reduced motion, and project-modal state govern playback. Skills and Contact retain the continuous crimson backdrop. Displayed PNG URLs are migrated to public WebP assets; original certificate downloads and the Next.js app-icon convention are preserved. Conversion, measured sizes, backups, and regeneration are documented in `.docs/IMAGE_ASSETS.md`.
 
 ### Dashboard sample screens
 

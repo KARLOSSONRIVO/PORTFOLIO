@@ -1,10 +1,10 @@
 export const stackProjects = {
-  carbonsense: { id: "carbonsense", title: "CarbonSense", logo: "/projects/logos/carbonsense.png" },
+  carbonsense: { id: "carbonsense", title: "CarbonSense", logo: "/projects/logos/carbonsense.webp" },
   finshield: { id: "finshield", title: "FinShield", logo: "/projects/logos/finshield.svg" },
-  daguconnect: { id: "daguconnect", title: "DaguConnect", logo: "/projects/logos/daguconnect.png" },
-  anchorwatch: { id: "anchorwatch", title: "AnchorWatch", logo: "/projects/logos/anchorwatch.png" },
-  sendnotes: { id: "sendnotes", title: "Send Notes", logo: "/projects/logos/sendnotes.png" },
-  paldex: { id: "paldex", title: "PalDex", logo: "/projects/logos/paldex.png" },
+  daguconnect: { id: "daguconnect", title: "DaguConnect", logo: "/projects/logos/daguconnect.webp" },
+  anchorwatch: { id: "anchorwatch", title: "AnchorWatch", logo: "/projects/logos/anchorwatch.webp" },
+  sendnotes: { id: "sendnotes", title: "Send Notes", logo: "/projects/logos/sendnotes.webp" },
+  paldex: { id: "paldex", title: "PalDex", logo: "/projects/logos/paldex.webp" },
   ucash: { id: "ucash", title: "UCash", logo: "/projects/logos/ucash.jpg" },
 } as const;
 

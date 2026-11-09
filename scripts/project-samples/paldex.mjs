@@ -2,6 +2,7 @@ import {readFile,writeFile,copyFile,mkdir,access} from "node:fs/promises";
 import {resolve,dirname} from "node:path";
 import {execFile} from "node:child_process";
 import {promisify} from "node:util";
+import {copySampleAsset} from "./copy-image.mjs";
 
 const run=promisify(execFile);
 
@@ -15,7 +16,7 @@ export async function generatePaldex(output) {
   const images=[...new Set([...html.matchAll(/(?:src|href)="(images\/[^"<>]+)"/g)].map(match=>match[1]))];
   for(const image of images) {
     await mkdir(dirname(resolve(assets,image)),{recursive:true});
-    await copyFile(resolve(source,image),resolve(assets,image));
+    await copySampleAsset(resolve(source,image),resolve(assets,image.replace(/\.png$/i,".webp")));
   }
   await copyFile(resolve(source,"Home.css"),resolve(assets,"Home.css"));
   // Keep the complete original 26-second scenes, resized for an embedded preview.
@@ -36,6 +37,7 @@ export async function generatePaldex(output) {
   html=html.replace(/<head>/,'<head>\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<meta http-equiv="Content-Security-Policy" content="default-src \'self\' data:; style-src \'self\' \'unsafe-inline\'; script-src \'self\'; media-src \'self\'; connect-src \'none\'; object-src \'none\'; form-action \'none\'">');
   html=html.replace('href="Home.css"','href="assets/paldex/Home.css"><link rel="stylesheet" href="paldex-preview.css"');
   html=html.replace(/(src|href)="(images\/[^"<>]+)"/g,'$1="assets/paldex/$2"');
+  html=html.replace(/\.png(?=")/gi,".webp");
   // Repair the original unclosed mobile video element and use one selected source.
   html=html.replace(/  <div class="container">[\s\S]*?<section>/,`<video loop muted playsinline preload="metadata" class="bg_video" poster="assets/paldex/home-desktop.jpg" aria-label="Original PALDEX background scene"><source src="assets/paldex/home-mobile.mp4" media="(max-width:980px)" type="video/mp4"><source src="assets/paldex/home-desktop.mp4" type="video/mp4"></video><section>`);
   html=html.replace('<div class="toggle">','<button type="button" class="toggle" aria-label="Open element menu" aria-expanded="false" aria-controls="paldex-elements">').replace(/(<\/span>\s*)<\/div>/,'$1</button>');

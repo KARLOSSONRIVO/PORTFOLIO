@@ -389,7 +389,7 @@ export default function DashboardPage() {
       >
         <div className="flex items-center gap-3 bg-linear-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 backdrop-blur-sm border border-white/20">
           <img 
-            src="/project-samples/assets/carbonsense/CarbonLogo.png" 
+            src="/project-samples/assets/carbonsense/CarbonLogo.webp"
             alt="AI Recommendations" 
             className="h-8 w-8 rounded-lg group-hover:scale-110 transition-transform duration-300"
           />

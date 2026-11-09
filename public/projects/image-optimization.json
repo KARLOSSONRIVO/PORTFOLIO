@@ -1,0 +1,218 @@
+{
+  "gallery": {
+    "count": 80,
+    "originalBytes": 11969142,
+    "bytes": 5269216
+  },
+  "displayImages": {
+    "count": 51,
+    "originalBytes": 5818354,
+    "bytes": 1931480
+  },
+  "replacements": [
+    {
+      "from": "/images/karlos-rivo-about-crossed-arms.png",
+      "to": "/images/karlos-rivo-about-crossed-arms.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/AnchorWise.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/AnchorWise.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/Compass.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/Compass.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/Home.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/Home.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/logo.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/logo.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/Notifications.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/Notifications.webp"
+    },
+    {
+      "from": "/project-samples/assets/anchorwatch-mobile/Profile.png",
+      "to": "/project-samples/assets/anchorwatch-mobile/Profile.webp"
+    },
+    {
+      "from": "/project-samples/assets/carbonsense/CarbonLogo.png",
+      "to": "/project-samples/assets/carbonsense/CarbonLogo.webp"
+    },
+    {
+      "from": "/project-samples/assets/carbonsense/CarbonLogo1.png",
+      "to": "/project-samples/assets/carbonsense/CarbonLogo1.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/A_close_book.png",
+      "to": "/project-samples/assets/paldex/images/icon/A_close_book.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/A_open_ book.png",
+      "to": "/project-samples/assets/paldex/images/icon/A_open_ book.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/DarkIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/DarkIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/DragonIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/DragonIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/ElectricIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/ElectricIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/FireIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/FireIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/GrassIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/GrassIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/GroundIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/GroundIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/HomeIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/HomeIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/IceIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/IceIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/Map.png",
+      "to": "/project-samples/assets/paldex/images/icon/Map.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/NeutralIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/NeutralIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/icon/WaterIcon.png",
+      "to": "/project-samples/assets/paldex/images/icon/WaterIcon.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/logo/PaldexLogo.png",
+      "to": "/project-samples/assets/paldex/images/logo/PaldexLogo.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/logo/PaldexLogo2.png",
+      "to": "/project-samples/assets/paldex/images/logo/PaldexLogo2.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/DarkBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/DarkBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/DragonBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/DragonBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/ElectricBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/ElectricBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/FireBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/FireBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/GrassBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/GrassBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/GroundBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/GroundBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/HomeBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/HomeBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/IceBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/IceBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/NeutralBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/NeutralBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/paldex/images/TEXT/WaterBar.png",
+      "to": "/project-samples/assets/paldex/images/TEXT/WaterBar.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/cattiva.png",
+      "to": "/project-samples/assets/pals/cattiva.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/foxparks.png",
+      "to": "/project-samples/assets/pals/foxparks.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/lamball.png",
+      "to": "/project-samples/assets/pals/lamball.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/pengullet.png",
+      "to": "/project-samples/assets/pals/pengullet.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/sparkit.png",
+      "to": "/project-samples/assets/pals/sparkit.webp"
+    },
+    {
+      "from": "/project-samples/assets/pals/tanzee.png",
+      "to": "/project-samples/assets/pals/tanzee.webp"
+    },
+    {
+      "from": "/project-samples/assets/ucash-add.png",
+      "to": "/project-samples/assets/ucash-add.webp"
+    },
+    {
+      "from": "/project-samples/assets/ucash-background.png",
+      "to": "/project-samples/assets/ucash-background.webp"
+    },
+    {
+      "from": "/project-samples/assets/ucash-exit.png",
+      "to": "/project-samples/assets/ucash-exit.webp"
+    },
+    {
+      "from": "/project-samples/assets/ucash-history.png",
+      "to": "/project-samples/assets/ucash-history.webp"
+    },
+    {
+      "from": "/project-samples/assets/ucash-logo.png",
+      "to": "/project-samples/assets/ucash-logo.webp"
+    },
+    {
+      "from": "/projects/logos/anchorwatch.png",
+      "to": "/projects/logos/anchorwatch.webp"
+    },
+    {
+      "from": "/projects/logos/carbonsense.png",
+      "to": "/projects/logos/carbonsense.webp"
+    },
+    {
+      "from": "/projects/logos/daguconnect.png",
+      "to": "/projects/logos/daguconnect.webp"
+    },
+    {
+      "from": "/projects/logos/paldex.png",
+      "to": "/projects/logos/paldex.webp"
+    },
+    {
+      "from": "/projects/logos/send-notes.png",
+      "to": "/projects/logos/send-notes.webp"
+    },
+    {
+      "from": "/projects/logos/sendnotes.png",
+      "to": "/projects/logos/sendnotes.webp"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import finshieldImg from "@/app/images/Projects/finshield.png";
+const finshieldImg = "/projects/images/finshield.webp";
 
 export default function FinShieldPage() {
   return (
@@ -14,7 +14,7 @@ export default function FinShieldPage() {
 
       <div className="aspect-video bg-zinc-900 rounded-2xl w-full mb-10 sm:mb-16 relative overflow-hidden border border-white/5 flex items-center justify-center">
         <img 
-          src={finshieldImg.src} 
+          src={finshieldImg}
           alt="FinShield Project Screenshot" 
           className="w-full h-full object-cover"
         />
